@@ -1,0 +1,523 @@
+/* ======================================================
+   Main Panel & Card Styling
+   ====================================================== */
+.admin-panel-card {
+    border: 1px solid #dddbda;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+    background-color: #fbfbfb;
+}
+.admin-panel-card .slds-card__header {
+    padding: 1rem 1.25rem;
+    background-color: #f3f4f6;
+    border-bottom: 1px solid #dddbda;
+}
+.admin-panel-card .slds-card__header-title {
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: #181818;
+}
+.admin-panel-card .slds-card__body {
+    padding: 0;
+}
+.admin-panel-card .slds-card__footer {
+    font-size: 0.8rem;
+    color: #514f4d;
+    background-color: #f3f4f6;
+    border-top: 1px solid #dddbda;
+}
+
+/* ======================================================
+   Tab & Accordion Styling
+   ====================================================== */
+.enhanced-tabset .slds-tabs_scoped__content {
+    background-color: transparent;
+}
+.accordion-container {
+    padding: 1rem;
+}
+lightning-accordion-section {
+    --slds-c-accordion-section-sizing-border: 1px solid #e0e0e0;
+    background-color: white;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+    border: 1px solid #e0e0e0;
+}
+.slds-accordion__summary-action:hover {
+    background-color: #f9f9f9;
+}
+.slds-accordion__summary-heading .slds-button {
+    font-weight: 600;
+    font-size: 1rem;
+    color: #08295c;
+}
+
+/* ======================================================
+   Overview Cards (Health & Queue)
+   ====================================================== */
+.overview-card {
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    height: 100%;
+    transition: all 0.2s ease-in-out;
+}
+.overview-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 12px rgba(0,0,0,0.08);
+}
+.health-card { border-left: 4px solid #0070d2; }
+.queue-card { border-left: 4px solid #ff9a3c; }
+
+.queue-metrics {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+.metric-card {
+    padding: 1rem;
+    background: #f9f9f9;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    text-align: center;
+    transition: all 0.2s ease;
+}
+.metric-card:hover {
+    background: #f3f3f3;
+    border-color: #c9c9c9;
+}
+.metric-number {
+    font-size: 2rem;
+    font-weight: 700;
+    line-height: 1.1;
+    color: #08295c;
+}
+.metric-label {
+    font-size: 0.8rem;
+    color: #555;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+.utilization-header { margin-bottom: 0.5rem; }
+.utilization-title { font-weight: 600; }
+.utilization-count { float: right; font-weight: bold; }
+
+/* ======================================================
+   Datatable Enhancements
+   ====================================================== */
+.datatable-container {
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    overflow: hidden;
+    padding: 0;
+}
+
+/* ======================================================
+   Job Detail Modal
+   ====================================================== */
+.job-details-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 2rem;
+}
+.details-column {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+.info-value.code {
+    font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace;
+    font-size: 0.85rem;
+    background-color: #f3f4f6;
+    padding: 0.1rem 0.4rem;
+    border-radius: 4px;
+    border: 1px solid #e0e0e0;
+    word-break: break-all;
+}
+.section-title {
+    border-bottom: 2px solid #0070d2;
+    padding-bottom: 0.5rem;
+    margin-bottom: 1rem;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #08295c;
+}
+.message-container {
+    background: #f3f4f6;
+    border-radius: 4px;
+    padding: 0.75rem 1rem;
+    border-left: 3px solid #b0b0b0;
+}
+.json-container {
+    background-color: #1e1e1e;
+    color: #d4d4d4;
+    padding: 1rem;
+    border-radius: 6px;
+    max-height: 400px;
+    overflow: auto;
+    font-size: 0.85rem;
+    border: 1px solid #333;
+}
+.json-container pre {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace;
+}
+.progress-item {
+    border-left: 2px solid #e0e0e0;
+    padding-left: 1.25rem;
+    position: relative;
+    padding-bottom: 1.5rem;
+}
+.progress-item:last-child {
+    border-left: 2px solid transparent;
+    padding-bottom: 0;
+}
+.progress-item-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+.progress-item .progress-item-header .slds-icon-utility {
+    position: absolute;
+    left: -0.7rem;
+    background: white;
+    padding: 0.1rem;
+    border-radius: 50%;
+}
+.progress-item-name {
+    flex: 1;
+    font-weight: 600;
+}
+.progress-item-details {
+    margin-left: 0.5rem;
+    margin-top: 0.5rem;
+    font-size: 0.85rem;
+    color: #3e3e3e;
+    background-color: #f3f4f6;
+    padding: 0.5rem 0.75rem;
+    border-radius: 4px;
+}
+
+/* ======================================================
+   General Utility & Responsive
+   ====================================================== */
+.loading-container {
+    min-height: 150px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.empty-state {
+    text-align: center;
+    padding: 2rem;
+    color: #514f4d;
+    font-style: italic;
+}
+@media (max-width: 768px) {
+    .queue-metrics {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Status-specific coloring for badges etc */
+.slds-theme_success { background-color: #45c65a; color: white; }
+.slds-theme_error { background-color: #ea5353; color: white; }
+.slds-theme_warning { background-color: #ffb75d; color: #181818; }
+.slds-theme_info { background-color: #549ded; color: white; }
+.slds-theme_shade { background-color: #e0e0e0; color: #181818; }
+
+/* Status-specific coloring for icons */
+.slds-icon-text-success { fill: #2e844a; }
+.slds-icon-text-error { fill: #c23934; }
+.slds-icon-text-warning { fill: #fe9339; }
+
+/* ======================================================
+   Logs Analytics Tab Styling
+   ====================================================== */
+.logs-section-header {
+    display: flex;
+    align-items: center;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #08295c;
+    margin-bottom: 0.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid #0070d2;
+}
+
+/* Cost Analytics Cards */
+.analytics-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.25rem;
+    border-radius: 10px;
+    background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+    border: 1px solid #e0e0e0;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+    transition: all 0.2s ease;
+    min-height: 90px;
+}
+.analytics-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+.analytics-card.cost-card.daily {
+    border-left: 4px solid #0070d2;
+}
+.analytics-card.cost-card.weekly {
+    border-left: 4px solid #ff9a3c;
+}
+.analytics-card.cost-card.monthly {
+    border-left: 4px solid #45c65a;
+}
+.analytics-card.cost-card.total {
+    border-left: 4px solid #9050e9;
+}
+.analytics-card-content {
+    flex: 1;
+}
+.analytics-number {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #08295c;
+    line-height: 1.2;
+    margin: 0;
+}
+.analytics-label {
+    font-size: 0.8rem;
+    color: #706e6b;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    margin: 0.25rem 0 0 0;
+}
+.analytics-icon {
+    opacity: 0.6;
+}
+
+/* Document Type Statistics Grid */
+.doc-type-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1rem;
+}
+.doc-type-card {
+    background: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 1rem;
+    transition: all 0.2s ease;
+}
+.doc-type-card:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    border-color: #c9c9c9;
+}
+.doc-type-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.75rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid #e0e0e0;
+}
+.doc-type-name {
+    font-weight: 600;
+    color: #08295c;
+    font-size: 0.95rem;
+}
+.doc-type-cost {
+    font-family: 'SFMono-Regular', Consolas, monospace;
+    font-size: 0.85rem;
+    color: #0070d2;
+    font-weight: 600;
+}
+.doc-type-stats {
+    font-size: 0.85rem;
+}
+.stat-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.25rem 0;
+}
+.stat-label {
+    color: #706e6b;
+}
+.stat-value {
+    font-weight: 500;
+    color: #181818;
+}
+.stat-value.success {
+    color: #2e844a;
+}
+.stat-value.error {
+    color: #c23934;
+}
+.doc-type-bars {
+    margin-top: 0.75rem;
+}
+.bar-container {
+    display: flex;
+    height: 6px;
+    background: #e0e0e0;
+    border-radius: 3px;
+    overflow: hidden;
+}
+.bar {
+    height: 100%;
+    transition: width 0.3s ease;
+}
+.bar.success-bar {
+    background: #45c65a;
+}
+.bar.error-bar {
+    background: #ea5353;
+}
+
+/* Retrigger Alert */
+.retrigger-alert {
+    display: flex;
+    align-items: center;
+    padding: 0.75rem 1rem;
+    background: #fffbea;
+    border: 1px solid #ffb75d;
+    border-radius: 6px;
+    color: #8d6e00;
+    font-size: 0.9rem;
+}
+
+/* Execution History Table */
+.execution-history-table {
+    overflow-x: auto;
+}
+.execution-history-table .slds-table {
+    min-width: 600px;
+}
+.app-link {
+    color: #0070d2;
+    text-decoration: none;
+    font-weight: 500;
+}
+.app-link:hover {
+    text-decoration: underline;
+}
+
+/* Execution History Modal */
+.execution-summary {
+    display: flex;
+    gap: 2rem;
+    padding: 1rem;
+    background: #f3f4f6;
+    border-radius: 8px;
+}
+.summary-stat {
+    display: flex;
+    flex-direction: column;
+}
+.summary-label {
+    font-size: 0.8rem;
+    color: #706e6b;
+    text-transform: uppercase;
+}
+.summary-value {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #08295c;
+}
+
+/* Execution Timeline */
+.execution-timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+.execution-entry {
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    overflow: hidden;
+    background: #ffffff;
+}
+.execution-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.75rem 1rem;
+    background: #f8f9fa;
+    border-bottom: 1px solid #e0e0e0;
+    flex-wrap: wrap;
+}
+.execution-count {
+    display: flex;
+    align-items: center;
+    font-weight: 600;
+    color: #08295c;
+}
+.execution-timestamp {
+    font-size: 0.85rem;
+    color: #706e6b;
+    margin-left: auto;
+}
+.execution-cost {
+    font-family: 'SFMono-Regular', Consolas, monospace;
+    font-size: 0.85rem;
+    color: #0070d2;
+    font-weight: 600;
+    padding: 0.2rem 0.5rem;
+    background: #e6f2ff;
+    border-radius: 4px;
+}
+.execution-error {
+    display: flex;
+    align-items: flex-start;
+    padding: 0.75rem 1rem;
+    background: #fef0f0;
+    color: #c23934;
+    font-size: 0.85rem;
+    border-bottom: 1px solid #f5c6c6;
+}
+.execution-records {
+    padding: 0.5rem;
+}
+.execution-records .slds-table {
+    font-size: 0.85rem;
+}
+.model-tag {
+    font-family: 'SFMono-Regular', Consolas, monospace;
+    font-size: 0.75rem;
+    padding: 0.15rem 0.4rem;
+    background: #f3f4f6;
+    border-radius: 4px;
+    color: #514f4d;
+}
+.token-info {
+    font-family: 'SFMono-Regular', Consolas, monospace;
+    font-size: 0.75rem;
+    padding: 0.15rem 0.4rem;
+    background: #e6f2ff;
+    border-radius: 4px;
+    color: #0070d2;
+    white-space: nowrap;
+}
+.record-error {
+    display: block;
+    max-width: 200px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: #c23934;
+    font-size: 0.8rem;
+}
+
+@media (max-width: 768px) {
+    .doc-type-grid {
+        grid-template-columns: 1fr;
+    }
+    .execution-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .execution-timestamp {
+        margin-left: 0;
+    }
+}

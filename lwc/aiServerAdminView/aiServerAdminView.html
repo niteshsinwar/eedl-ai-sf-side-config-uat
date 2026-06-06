@@ -1,0 +1,743 @@
+<template>
+    <lightning-card class="admin-panel-card">
+        <div slot="title" class="slds-media slds-media_center">
+            <div class="slds-media__figure">
+                <lightning-icon icon-name="custom:custom9" size="small"></lightning-icon>
+            </div>
+            <div class="slds-media__body">
+                <h2 class="slds-card__header-title">AI Server Admin Panel</h2>
+            </div>
+        </div>
+        <div slot="actions">
+            <lightning-button-group>
+                <lightning-button label={autoRefreshButtonLabel} icon-name={autoRefreshIcon}
+                    onclick={toggleAutoRefresh}></lightning-button>
+                <lightning-button label="Refresh All" icon-name="utility:refresh" onclick={handleRefresh}
+                    variant="brand"></lightning-button>
+            </lightning-button-group>
+        </div>
+
+        <lightning-tabset variant="scoped" class="enhanced-tabset">
+            <lightning-tab label="Overview" icon-name="utility:home">
+                <div class="slds-p-around_medium">
+                    <lightning-layout multiple-rows="true">
+                        <lightning-layout-item size="12" large-device-size="4" padding="around-small">
+                            <lightning-card variant="Narrow" title="Service Health" icon-name="utility:pulse"
+                                class="overview-card health-card">
+                                <div class="slds-p-horizontal_small slds-p-bottom_small">
+                                    <template if:true={isLoading.health}>
+                                        <div class="loading-container"><lightning-spinner
+                                                size="small"></lightning-spinner></div>
+                                    </template>
+                                    <template if:false={isLoading.health}>
+                                        <template if:true={healthData}>
+                                            <div class="health-header"><lightning-badge label={healthData.status}
+                                                    class={healthStatusClass}></lightning-badge></div>
+                                            <div class="health-version">Version:
+                                                <strong>{healthData.application_version}</strong>
+                                            </div>
+                                            <div class="health-checks">
+                                                <template for:each={healthData.checks} for:item="check">
+                                                    <div key={check.name} class="health-check-item">
+                                                        <div class="check-header">
+                                                            <lightning-icon icon-name={check.icon} size="x-small"
+                                                                class="check-icon"></lightning-icon>
+                                                            <span class="check-name">{check.name}</span>
+                                                            <span class="check-status">{check.status}</span>
+                                                        </div>
+                                                        <template if:true={check.details}>
+                                                            <p class="check-details">{check.details}</p>
+                                                        </template>
+                                                    </div>
+                                                </template>
+                                            </div>
+                                        </template>
+                                        <template if:true={error.health}>
+                                            <div class="error-message">{error.health}</div>
+                                        </template>
+                                    </template>
+                                </div>
+                            </lightning-card>
+                        </lightning-layout-item>
+                        <lightning-layout-item size="12" large-device-size="8" padding="around-small">
+                            <lightning-card variant="Narrow" title="Job Queue Overview" icon-name="utility:queue"
+                                class="overview-card queue-card">
+                                <div class="slds-p-horizontal_small slds-p-bottom_small">
+                                    <template if:true={isLoading.jobs}>
+                                        <div class="loading-container"><lightning-spinner
+                                                size="small"></lightning-spinner></div>
+                                    </template>
+                                    <template if:false={isLoading.jobs}>
+                                        <template if:true={queueData}>
+                                            <div class="queue-metrics">
+                                                <div class="metric-card">
+                                                    <div class="metric-content">
+                                                        <p class="metric-number">{queueData.active_jobs}</p>
+                                                        <p class="metric-label">Active Jobs</p>
+                                                    </div>
+                                                </div>
+                                                <div class="metric-card">
+                                                    <div class="metric-content">
+                                                        <p class="metric-number">{queueData.tracked_jobs_total}</p>
+                                                        <p class="metric-label">Total Job Records</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="slot-utilization">
+                                                <div class="utilization-header"><span class="utilization-title">Slot
+                                                        Utilization</span><span
+                                                        class="utilization-count">{queueData.slot_utilization.active_slots}
+                                                        / {queueData.slot_utilization.max_slots}</span></div>
+                                                <lightning-progress-bar value={queueData.slot_utilization.load_percent}
+                                                    size="large"></lightning-progress-bar>
+                                            </div>
+                                        </template>
+                                        <template if:true={error.active}>
+                                            <div class="error-message">{error.active}</div>
+                                        </template>
+                                    </template>
+                                </div>
+                            </lightning-card>
+                        </lightning-layout-item>
+                    </lightning-layout>
+                </div>
+            </lightning-tab>
+
+            <lightning-tab label="Jobs" icon-name="utility:list">
+                <div class="accordion-container">
+                    <lightning-accordion allow-multiple-sections-open active-section-name={activeSections}>
+                        <lightning-accordion-section name="progressing" label="Progressing & Queued Jobs">
+                            <div slot="actions"><lightning-badge label={activeJobs.length}></lightning-badge></div>
+                            <div class="mass-actions slds-m-bottom_small">
+                                <lightning-button-group>
+                                    <lightning-button label="Delete Selected" onclick={handleMassDeleteActiveJobs}
+                                        disabled={isMassDeleteActiveDisabled}></lightning-button>
+                                </lightning-button-group>
+                            </div>
+                            <div class="slds-p-around_small datatable-container">
+                                <template if:true={isLoading.jobs}>
+                                    <div class="loading-container"><lightning-spinner size="small"></lightning-spinner>
+                                    </div>
+                                </template>
+                                <template if:false={isLoading.jobs}>
+                                    <template if:true={hasActiveJobs}>
+                                        <lightning-datatable key-field="job_id" data={activeJobs}
+                                            columns={activeJobsColumns} onrowaction={handleRowAction}
+                                            onrowselection={handleActiveJobsSelection}></lightning-datatable>
+                                    </template>
+                                    <template if:false={hasActiveJobs}>
+                                        <div class="empty-state">No Active or Queued Jobs</div>
+                                    </template>
+                                </template>
+                            </div>
+                        </lightning-accordion-section>
+                        <lightning-accordion-section name="concluded" label="Concluded Jobs (Last 100)">
+                            <div slot="actions"><lightning-badge label={concludedJobs.length}></lightning-badge></div>
+                            <div class="mass-actions slds-m-bottom_small">
+                                <lightning-button-group>
+                                    <lightning-button label="Delete Selected" onclick={handleMassDeleteConcludedJobs}
+                                        disabled={isMassDeleteConcludedDisabled}></lightning-button>
+                                    <lightning-button label="Retry Selected" onclick={handleMassRetryConcludedJobs}
+                                        disabled={isMassRetryConcludedDisabled}></lightning-button>
+                                </lightning-button-group>
+                            </div>
+                            <div class="slds-p-around_small datatable-container">
+                                <template if:true={isLoading.jobs}>
+                                    <div class="loading-container"><lightning-spinner size="small"></lightning-spinner>
+                                    </div>
+                                </template>
+                                <template if:false={isLoading.jobs}>
+                                    <template if:true={hasConcludedJobs}>
+                                        <lightning-datatable key-field="id" data={concludedJobs}
+                                            columns={concludedJobsColumns} onrowaction={handleRowAction}
+                                            onrowselection={handleConcludedJobsSelection}></lightning-datatable>
+                                    </template>
+                                    <template if:false={hasConcludedJobs}>
+                                        <div class="empty-state">No Concluded Jobs Found</div>
+                                    </template>
+                                </template>
+                            </div>
+                        </lightning-accordion-section>
+                    </lightning-accordion>
+                </div>
+            </lightning-tab>
+
+            <lightning-tab label="API Transactions" icon-name="utility:apex">
+                <div class="accordion-container">
+                    <lightning-accordion allow-multiple-sections-open active-section-name={activeSections}>
+                        <lightning-accordion-section name="succeeded_transactions" label="Successful Initial Callouts">
+                            <div slot="actions"><lightning-badge label={succeededApiLogs.length}></lightning-badge>
+                            </div>
+                            <div class="mass-actions slds-m-bottom_small">
+                                <lightning-button-group>
+                                    <lightning-button label="Delete Selected"
+                                        onclick={handleMassDeleteSucceededTransactions}
+                                        disabled={isMassDeleteSucceededDisabled}></lightning-button>
+                                </lightning-button-group>
+                            </div>
+                            <div class="slds-p-around_small datatable-container">
+                                <template if:true={isLoading.transactions}>
+                                    <div class="loading-container"><lightning-spinner size="small"></lightning-spinner>
+                                    </div>
+                                </template>
+                                <template if:false={isLoading.transactions}>
+                                    <template if:true={hasSucceededApiLogs}>
+                                        <lightning-datatable key-field="logId" data={succeededApiLogs}
+                                            columns={succeededApiColumns} onsort={handleSort} sorted-by={sortedBy}
+                                            sorted-direction={sortDirection}
+                                            onrowselection={handleSucceededTransactionsSelection}></lightning-datatable>
+                                    </template>
+                                    <template if:false={hasSucceededApiLogs}>
+                                        <div class="empty-state">No Successful Callouts Logged</div>
+                                    </template>
+                                </template>
+                            </div>
+                        </lightning-accordion-section>
+                        <lightning-accordion-section name="failed_transactions" label="Failed Initial Callouts">
+                            <div slot="actions">
+                                <lightning-button-group>
+                                    <lightning-button label="Delete Selected"
+                                        onclick={handleMassDeleteFailedTransactions}
+                                        disabled={isMassDeleteFailedDisabled}></lightning-button>
+                                    <lightning-button label="Retry Selected" onclick={handleMassRetryFailedTransactions}
+                                        disabled={isMassDeleteFailedDisabled} variant="brand"></lightning-button>
+                                </lightning-button-group>
+                                <lightning-badge label={failedApiLogs.length}
+                                    class="slds-m-left_small"></lightning-badge>
+                            </div>
+                            <div class="slds-p-around_small datatable-container">
+                                <template if:true={isLoading.transactions}>
+                                    <div class="loading-container"><lightning-spinner size="small"></lightning-spinner>
+                                    </div>
+                                </template>
+                                <template if:false={isLoading.transactions}>
+                                    <template if:true={hasFailedApiLogs}>
+                                        <lightning-datatable key-field="logId" data={failedApiLogs}
+                                            columns={failedApiColumns} onsort={handleSort} sorted-by={sortedBy}
+                                            sorted-direction={sortDirection}
+                                            onrowselection={handleFailedTransactionsSelection}></lightning-datatable>
+                                    </template>
+                                    <template if:false={hasFailedApiLogs}>
+                                        <div class="empty-state">No Failed Callouts Logged</div>
+                                    </template>
+                                </template>
+                            </div>
+                        </lightning-accordion-section>
+                    </lightning-accordion>
+                </div>
+            </lightning-tab>
+
+            <lightning-tab label="Logs" icon-name="utility:activity">
+                <div class="slds-p-around_medium">
+                    <template if:true={isLoading.logs}>
+                        <div class="loading-container"><lightning-spinner size="medium"></lightning-spinner></div>
+                    </template>
+                    <template if:false={isLoading.logs}>
+                        <template if:false={hasLogsData}>
+                            <div class="empty-state">No Logs Data Available</div>
+                        </template>
+                        <template if:true={hasLogsData}>
+                            <!-- Date Range Filter -->
+                            <div class="slds-box slds-theme_shade slds-m-bottom_medium">
+                                <lightning-layout vertical-align="end">
+                                    <lightning-layout-item padding="horizontal-small" size="12" small-device-size="6"
+                                        medium-device-size="4" large-device-size="3">
+                                        <lightning-input type="datetime" label="From" value={startDate}
+                                            onchange={handleStartDateChange}></lightning-input>
+                                    </lightning-layout-item>
+                                    <lightning-layout-item padding="horizontal-small" size="12" small-device-size="6"
+                                        medium-device-size="4" large-device-size="3">
+                                        <lightning-input type="datetime" label="To" value={endDate}
+                                            onchange={handleEndDateChange}></lightning-input>
+                                    </lightning-layout-item>
+                                    <lightning-layout-item padding="horizontal-small" size="12" small-device-size="12"
+                                        medium-device-size="4" large-device-size="2">
+                                        <lightning-button label="Reset Filters" title="Reset Filters"
+                                            onclick={handleResetFilters} icon-name="utility:clear"
+                                            class="slds-m-top_large"></lightning-button>
+                                    </lightning-layout-item>
+                                </lightning-layout>
+                            </div>
+
+                            <!-- Cost Analytics Overview -->
+                            <lightning-layout multiple-rows="true" class="slds-m-bottom_medium">
+                                <lightning-layout-item size="12" class="slds-m-bottom_small">
+                                    <h3 class="logs-section-header">
+                                        <lightning-icon icon-name="utility:moneybag" size="small"
+                                            class="slds-m-right_x-small"></lightning-icon>
+                                        Cost & Token Analytics
+                                    </h3>
+                                </lightning-layout-item>
+                                <template if:false={isDateFilterActive}>
+                                    <lightning-layout-item size="12" medium-device-size="6" large-device-size="3"
+                                        padding="around-small">
+                                        <div class="analytics-card cost-card daily">
+                                            <div class="analytics-card-content">
+                                                <p class="analytics-number">${costAnalytics.daily}</p>
+                                                <p class="analytics-label">Last 24 Hours</p>
+                                                <div class="token-stats">
+                                                    <p class="analytics-sub-label">Input Tokens:
+                                                        {costAnalytics.dailyTokens.input}</p>
+                                                    <p class="analytics-sub-label">Output Tokens:
+                                                        {costAnalytics.dailyTokens.output}</p>
+                                                </div>
+                                            </div>
+                                            <lightning-icon icon-name="utility:clock" size="small"
+                                                class="analytics-icon"></lightning-icon>
+                                        </div>
+                                    </lightning-layout-item>
+                                    <lightning-layout-item size="12" medium-device-size="6" large-device-size="3"
+                                        padding="around-small">
+                                        <div class="analytics-card cost-card weekly">
+                                            <div class="analytics-card-content">
+                                                <p class="analytics-number">${costAnalytics.weekly}</p>
+                                                <p class="analytics-label">Last 7 Days</p>
+                                                <div class="token-stats">
+                                                    <p class="analytics-sub-label">Input Tokens:
+                                                        {costAnalytics.weeklyTokens.input}</p>
+                                                    <p class="analytics-sub-label">Output Tokens:
+                                                        {costAnalytics.weeklyTokens.output}</p>
+                                                </div>
+                                            </div>
+                                            <lightning-icon icon-name="utility:event" size="small"
+                                                class="analytics-icon"></lightning-icon>
+                                        </div>
+                                    </lightning-layout-item>
+                                    <lightning-layout-item size="12" medium-device-size="6" large-device-size="3"
+                                        padding="around-small">
+                                        <div class="analytics-card cost-card monthly">
+                                            <div class="analytics-card-content">
+                                                <p class="analytics-number">${costAnalytics.monthly}</p>
+                                                <p class="analytics-label">Last 30 Days</p>
+                                                <div class="token-stats">
+                                                    <p class="analytics-sub-label">Input Tokens:
+                                                        {costAnalytics.monthlyTokens.input}</p>
+                                                    <p class="analytics-sub-label">Output Tokens:
+                                                        {costAnalytics.monthlyTokens.output}</p>
+                                                </div>
+                                            </div>
+                                            <lightning-icon icon-name="utility:date_input" size="small"
+                                                class="analytics-icon"></lightning-icon>
+                                        </div>
+                                    </lightning-layout-item>
+                                </template>
+                                <lightning-layout-item size="12" medium-device-size="6" large-device-size="3"
+                                    padding="around-small">
+                                    <div class="analytics-card cost-card total">
+                                        <div class="analytics-card-content">
+                                            <p class="analytics-number">${costAnalytics.total}</p>
+                                            <p class="analytics-label">{totalCardLabel}</p>
+                                            <div class="token-stats">
+                                                <p class="analytics-sub-label">Input Tokens:
+                                                    {costAnalytics.totalTokens.input}</p>
+                                                <p class="analytics-sub-label">Output Tokens:
+                                                    {costAnalytics.totalTokens.output}</p>
+                                            </div>
+                                        </div>
+                                        <lightning-icon icon-name="utility:chart" size="small"
+                                            class="analytics-icon"></lightning-icon>
+                                    </div>
+                                </lightning-layout-item>
+                            </lightning-layout>
+
+                            <lightning-accordion allow-multiple-sections-open active-section-name={activeSections}>
+                                <!-- Document Type Statistics -->
+                                <lightning-accordion-section name="document_stats" label="Document Type Performance">
+                                    <div slot="actions"><lightning-badge
+                                            label={documentTypeStats.length}></lightning-badge></div>
+                                    <div class="slds-p-around_small">
+                                        <template if:true={hasDocumentTypeStats}>
+                                            <div class="doc-type-grid">
+                                                <template for:each={documentTypeStats} for:item="docType">
+                                                    <div key={docType.recordType} class="doc-type-card">
+                                                        <div class="doc-type-header">
+                                                            <span class="doc-type-name">{docType.displayName}</span>
+                                                            <span class="doc-type-cost">${docType.formattedCost}</span>
+                                                        </div>
+                                                        <div class="doc-type-stats">
+                                                            <div class="stat-row">
+                                                                <span class="stat-label">Total Processed:</span>
+                                                                <span class="stat-value">{docType.totalCount}</span>
+                                                            </div>
+                                                            <div class="stat-row">
+                                                                <span class="stat-label">Success:</span>
+                                                                <span class="stat-value success">{docType.successCount}
+                                                                    ({docType.successRate}%)</span>
+                                                            </div>
+                                                            <div class="stat-row">
+                                                                <span class="stat-label">Failed:</span>
+                                                                <span class="stat-value error">{docType.errorCount}
+                                                                    ({docType.errorRate}%)</span>
+                                                            </div>
+                                                            <div class="stat-row">
+                                                                <span class="stat-label">Skipped:</span>
+                                                                <span class="stat-value">{docType.skippedCount}</span>
+                                                            </div>
+                                                            <div class="stat-row">
+                                                                <span class="stat-label">Avg Cost/Record:</span>
+                                                                <span
+                                                                    class="stat-value">${docType.avgCostPerRecord}</span>
+                                                            </div>
+                                                            <div class="stat-row">
+                                                                <span class="stat-label">Doc Tokens (In/Out):</span>
+                                                                <span class="stat-value">{docType.totalDocInput} /
+                                                                    {docType.totalDocOutput}</span>
+                                                            </div>
+                                                            <div class="stat-row">
+                                                                <span class="stat-label">Crew Tokens (In/Out):</span>
+                                                                <span class="stat-value">{docType.totalCrewInput} /
+                                                                    {docType.totalCrewOutput}</span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="doc-type-bars">
+                                                            <div class="bar-container">
+                                                                <div class="bar success-bar"
+                                                                    style={docType.successBarStyle}></div>
+                                                                <div class="bar error-bar"
+                                                                    style={docType.errorBarStyle}></div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </template>
+                                            </div>
+                                        </template>
+                                        <template if:false={hasDocumentTypeStats}>
+                                            <div class="empty-state">No Document Type Statistics Available</div>
+                                        </template>
+                                    </div>
+                                </lightning-accordion-section>
+
+                                <!-- Application Execution History -->
+                                <lightning-accordion-section name="execution_history"
+                                    label="Application Execution History">
+                                    <div slot="actions"><lightning-badge
+                                            label={applicationExecutionHistory.length}></lightning-badge></div>
+                                    <div class="slds-p-around_small">
+                                        <template if:true={hasApplicationExecutionHistory}>
+                                            <!-- Retrigger Alert -->
+                                            <template if:true={hasMultipleRetriesApplications}>
+                                                <div class="retrigger-alert slds-m-bottom_medium">
+                                                    <lightning-icon icon-name="utility:warning" size="small"
+                                                        variant="warning" class="slds-m-right_x-small"></lightning-icon>
+                                                    <span><strong>{multipleRetriesApplications.length}</strong>
+                                                        application(s) have been retriggered multiple times</span>
+                                                </div>
+                                            </template>
+                                            <div class="execution-history-table">
+                                                <table
+                                                    class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_striped">
+                                                    <thead>
+                                                        <tr class="slds-line-height_reset">
+                                                            <th scope="col">
+                                                                <div class="slds-truncate">Application</div>
+                                                            </th>
+                                                            <th scope="col">
+                                                                <div class="slds-truncate">Retriggers</div>
+                                                            </th>
+                                                            <th scope="col">
+                                                                <div class="slds-truncate">Latest Status</div>
+                                                            </th>
+                                                            <th scope="col">
+                                                                <div class="slds-truncate">Total Tokens (In/Out)</div>
+                                                            </th>
+                                                            <th scope="col">
+                                                                <div class="slds-truncate">Total Cost</div>
+                                                            </th>
+                                                            <th scope="col">
+                                                                <div class="slds-truncate">Actions</div>
+                                                            </th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <template for:each={applicationExecutionHistory} for:item="app">
+                                                            <tr key={app.applicationId}>
+                                                                <td>
+                                                                    <a href={app.applicationUrl} target="_blank"
+                                                                        class="app-link">{app.applicationName}</a>
+                                                                </td>
+                                                                <td>
+                                                                    <template if:true={app.retriggeredMultipleTimes}>
+                                                                        <lightning-badge label={app.totalRetriggers}
+                                                                            class="slds-theme_warning"></lightning-badge>
+                                                                    </template>
+                                                                    <template if:false={app.retriggeredMultipleTimes}>
+                                                                        <span>{app.totalRetriggers}</span>
+                                                                    </template>
+                                                                </td>
+                                                                <td>
+                                                                    <lightning-badge label={app.lastStatus}
+                                                                        class={app.latestExecution.statusClass}></lightning-badge>
+                                                                </td>
+                                                                <td>
+                                                                    <span class="token-info">{app.totalTokens.input} /
+                                                                        {app.totalTokens.output}</span>
+                                                                </td>
+                                                                <td>${app.formattedTotalCost}</td>
+                                                                <td>
+                                                                    <lightning-button label="View History"
+                                                                        variant="base"
+                                                                        onclick={viewApplicationExecutionHistory}
+                                                                        data-application-id={app.applicationId}
+                                                                        icon-name="utility:preview">
+                                                                    </lightning-button>
+                                                                </td>
+                                                            </tr>
+                                                        </template>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </template>
+                                        <template if:false={hasApplicationExecutionHistory}>
+                                            <div class="empty-state">No Application Execution History Available</div>
+                                        </template>
+                                    </div>
+                                </lightning-accordion-section>
+                            </lightning-accordion>
+                        </template>
+                    </template>
+                </div>
+            </lightning-tab>
+        </lightning-tabset>
+
+        <div slot="footer" class="slds-text-align_center slds-p-vertical_xx-small">
+            Last Refresh: <lightning-formatted-date-time value={lastRefreshTime} hour="2-digit" minute="2-digit"
+                second="2-digit"></lightning-formatted-date-time>
+        </div>
+    </lightning-card>
+
+    <template if:true={showJobDetailModal}>
+        <section role="dialog" tabindex="-1" class="slds-modal slds-fade-in-open slds-modal_large">
+            <div class="slds-modal__container">
+                <header class="slds-modal__header">
+                    <h2 class="slds-modal__title slds-text-heading_medium">Job Details: {selectedJob.application_id}
+                    </h2>
+                    <lightning-button-icon icon-name="utility:close" alternative-text="close"
+                        onclick={closeJobDetailModal} class="slds-modal__close"></lightning-button-icon>
+                </header>
+                <div class="slds-modal__content slds-p-around_medium" style="max-height: 70vh; overflow-y: auto;">
+                    <template if:true={isJobDetailLoading}>
+                        <div class="loading-container"><lightning-spinner></lightning-spinner></div>
+                    </template>
+                    <template if:false={isJobDetailLoading}>
+                        <template if:true={selectedJob}>
+                            <div class="job-details-grid">
+                                <div class="details-column">
+                                    <div class="job-info-section">
+                                        <h3 class="section-title">Job Information</h3>
+                                        <dl class="slds-dl_horizontal">
+                                            <dt class="slds-dl_horizontal__label">Job ID:</dt>
+                                            <dd class="slds-dl_horizontal__detail info-value code">{selectedJob.job_id}
+                                            </dd>
+                                            <dt class="slds-dl_horizontal__label">Status:</dt>
+                                            <dd class="slds-dl_horizontal__detail"><lightning-badge
+                                                    label={selectedJob.status}
+                                                    class={selectedJob.statusClass}></lightning-badge></dd>
+                                            <dt class="slds-dl_horizontal__label">SF Job Record:</dt>
+                                            <dd class="slds-dl_horizontal__detail info-value code">
+                                                {selectedJob.salesforce_job_record_id}</dd>
+                                            <dt class="slds-dl_horizontal__label">Client:</dt>
+                                            <dd class="slds-dl_horizontal__detail info-value code">
+                                                {selectedJob.client_fingerprint}</dd>
+                                            <dt class="slds-dl_horizontal__label">Created:</dt>
+                                            <dd class="slds-dl_horizontal__detail"><lightning-formatted-date-time
+                                                    value={selectedJob.created_at} year="numeric" month="long"
+                                                    day="2-digit" hour="2-digit"
+                                                    minute="2-digit"></lightning-formatted-date-time></dd>
+                                            <dt class="slds-dl_horizontal__label">Updated:</dt>
+                                            <dd class="slds-dl_horizontal__detail"><lightning-formatted-date-time
+                                                    value={selectedJob.last_updated_at} year="numeric" month="long"
+                                                    day="2-digit" hour="2-digit"
+                                                    minute="2-digit"></lightning-formatted-date-time></dd>
+                                        </dl>
+                                    </div>
+                                    <div class="job-message-section">
+                                        <h3 class="section-title">Server Message</h3>
+                                        <div class="message-container">
+                                            <p class="message-text">{selectedJob.message}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="details-column">
+                                    <div class="job-progress-section">
+                                        <h3 class="section-title">Processing Progress</h3>
+                                        <template for:each={selectedJob.progress.details} for:item="progressItem">
+                                            <div key={progressItem.name} class="progress-item">
+                                                <div class="progress-item-header">
+                                                    <lightning-icon icon-name={progressItem.icon} size="small"
+                                                        class={progressItem.iconClass}></lightning-icon>
+                                                    <span class="progress-item-name">{progressItem.name}</span>
+                                                    <lightning-badge label={progressItem.status}
+                                                        class={progressItem.statusClass}></lightning-badge>
+                                                </div>
+                                                <template if:true={progressItem.details}>
+                                                    <div class="progress-item-details">
+                                                        <p>{progressItem.details}</p>
+                                                    </div>
+                                                </template>
+                                            </div>
+                                        </template>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="job-raw-json-section slds-m-top_large">
+                                <h3 class="section-title">Raw Progress Data (JSON)</h3>
+                                <div class="json-container">
+                                    <pre><code>{selectedJob.formattedProgressJson}</code></pre>
+                                </div>
+                            </div>
+                        </template>
+                    </template>
+                </div>
+                <footer class="slds-modal__footer">
+                    <lightning-button label="Close" onclick={closeJobDetailModal} variant="brand"></lightning-button>
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
+
+    <template if:true={modal.show}>
+        <section role="dialog" tabindex="-1" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <header class="slds-modal__header">
+                    <h2 class="slds-modal__title">{modal.title}</h2>
+                </header>
+                <div class="slds-modal__content slds-p-around_medium">{modal.message}</div>
+                <footer class="slds-modal__footer">
+                    <lightning-button label="Cancel" onclick={closeModal}></lightning-button>
+                    <lightning-button label={modal.confirmLabel} variant="brand" onclick={confirmAction}
+                        class="slds-m-left_x-small"></lightning-button>
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
+
+    <!-- Execution History Modal -->
+    <template if:true={showExecutionHistoryModal}>
+        <section role="dialog" tabindex="-1" class="slds-modal slds-fade-in-open slds-modal_large">
+            <div class="slds-modal__container">
+                <header class="slds-modal__header">
+                    <h2 class="slds-modal__title slds-text-heading_medium">
+                        Execution History: {selectedApplicationLogs.applicationName}
+                    </h2>
+                    <lightning-button-icon icon-name="utility:close" alternative-text="close"
+                        onclick={closeExecutionHistoryModal} class="slds-modal__close"></lightning-button-icon>
+                </header>
+                <div class="slds-modal__content slds-p-around_medium" style="max-height: 70vh; overflow-y: auto;">
+                    <template if:true={selectedApplicationLogs}>
+                        <!-- Summary Header -->
+                        <div class="execution-summary slds-m-bottom_medium">
+                            <div class="summary-stat">
+                                <span class="summary-label">Total Executions:</span>
+                                <span class="summary-value">{selectedApplicationLogs.totalRetriggers}</span>
+                            </div>
+                            <div class="summary-stat">
+                                <span class="summary-label">Total Tokens (In/Out):</span>
+                                <span class="summary-value token-text">{selectedApplicationLogs.totalTokens.input} /
+                                    {selectedApplicationLogs.totalTokens.output}</span>
+                            </div>
+                            <div class="summary-stat">
+                                <span class="summary-label">Total Cost:</span>
+                                <span class="summary-value">${selectedApplicationLogs.formattedTotalCost}</span>
+                            </div>
+                        </div>
+
+                        <!-- Execution Timeline -->
+                        <div class="execution-timeline">
+                            <template for:each={selectedApplicationLogs.executions} for:item="execution">
+                                <div key={execution.count} class="execution-entry">
+                                    <div class="execution-header">
+                                        <div class="execution-count">
+                                            <lightning-icon icon-name="utility:routing_offline" size="x-small"
+                                                class="slds-m-right_xx-small"></lightning-icon>
+                                            Execution #{execution.count}
+                                        </div>
+                                        <lightning-badge label={execution.status}
+                                            class={execution.statusClass}></lightning-badge>
+                                        <span class="execution-timestamp">{execution.formattedTimestamp}</span>
+                                        <div class="execution-metrics">
+                                            <span class="metric-item">
+                                                <span class="metric-label">Tokens (In/Out):</span>
+                                                <span class="metric-value">{execution.tokens.input} /
+                                                    {execution.tokens.output}</span>
+                                            </span>
+                                            <span class="execution-cost">${execution.cost}</span>
+                                        </div>
+                                    </div>
+                                    <template if:true={execution.error}>
+                                        <div class="execution-error">
+                                            <lightning-icon icon-name="utility:error" size="x-small" variant="error"
+                                                class="slds-m-right_xx-small"></lightning-icon>
+                                            {execution.error}
+                                        </div>
+                                    </template>
+                                    <div class="execution-records">
+                                        <table
+                                            class="slds-table slds-table_cell-buffer slds-table_bordered slds-no-row-hover">
+                                            <thead>
+                                                <tr class="slds-line-height_reset">
+                                                    <th scope="col">
+                                                        <div class="slds-truncate">Record Type</div>
+                                                    </th>
+                                                    <th scope="col">
+                                                        <div class="slds-truncate">Status</div>
+                                                    </th>
+                                                    <th scope="col">
+                                                        <div class="slds-truncate">Doc Model</div>
+                                                    </th>
+                                                    <th scope="col">
+                                                        <div class="slds-truncate">Doc Tokens (In/Out)</div>
+                                                    </th>
+                                                    <th scope="col">
+                                                        <div class="slds-truncate">Crew Model</div>
+                                                    </th>
+                                                    <th scope="col">
+                                                        <div class="slds-truncate">Crew Tokens (In/Out)</div>
+                                                    </th>
+                                                    <th scope="col">
+                                                        <div class="slds-truncate">Cost</div>
+                                                    </th>
+                                                    <th scope="col">
+                                                        <div class="slds-truncate">Error</div>
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <template for:each={execution.records} for:item="record">
+                                                    <tr key={record.record_type}>
+                                                        <td>{record.displayName}</td>
+                                                        <td><lightning-badge label={record.status}
+                                                                class={record.statusClass}></lightning-badge></td>
+                                                        <td><span class="model-tag">{record.doc_model}</span></td>
+                                                        <td><span class="token-info">{record.doc_input} /
+                                                                {record.doc_output}</span></td>
+                                                        <td><span class="model-tag">{record.crew_model}</span></td>
+                                                        <td><span class="token-info">{record.crew_input} /
+                                                                {record.crew_output}</span></td>
+                                                        <td>${record.formattedCost}</td>
+                                                        <td>
+                                                            <template if:true={record.error}>
+                                                                <span class="record-error"
+                                                                    title={record.error}>{record.error}</span>
+                                                            </template>
+                                                        </td>
+                                                    </tr>
+                                                </template>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </template>
+                        </div>
+                    </template>
+                </div>
+                <footer class="slds-modal__footer">
+                    <lightning-button label="Close" onclick={closeExecutionHistoryModal}
+                        variant="brand"></lightning-button>
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
+</template>
