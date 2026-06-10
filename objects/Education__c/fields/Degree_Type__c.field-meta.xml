@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Degree_Type__c</fullName>
+    <label>Education Level</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Class 10/O Level/Pre-High School (US)</fullName>
+                <default>false</default>
+                <label>Class 10/O Level/Pre-High School (US)</label>
+            </value>
+            <value>
+                <fullName>Class 11</fullName>
+                <default>false</default>
+                <label>Class 11</label>
+            </value>
+            <value>
+                <fullName>Class 12/A Level/High School</fullName>
+                <default>false</default>
+                <label>Class 12/A Level/High School</label>
+            </value>
+            <value>
+                <fullName>Bachelors</fullName>
+                <default>false</default>
+                <label>Bachelors</label>
+            </value>
+            <value>
+                <fullName>Post Graduate Programme/Diploma</fullName>
+                <default>false</default>
+                <label>Post Graduate Programme/Diploma</label>
+            </value>
+            <value>
+                <fullName>Masters</fullName>
+                <default>false</default>
+                <label>Masters</label>
+            </value>
+            <value>
+                <fullName>Professional</fullName>
+                <default>false</default>
+                <label>Professional</label>
+            </value>
+            <value>
+                <fullName>Doctoral</fullName>
+                <default>false</default>
+                <label>Doctoral</label>
+            </value>
+            <value>
+                <fullName>Others</fullName>
+                <default>false</default>
+                <label>Others</label>
+            </value>
+            <value>
+                <fullName>Class 12/A Level/High School (US)</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Class 12/A Level/High School (US)</label>
+            </value>
+            <value>
+                <fullName>Doctorate</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Doctorate</label>
+            </value>
+            <value>
+                <fullName>Graduation</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Graduation</label>
+            </value>
+            <value>
+                <fullName>Post Graduation</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Post Graduation</label>
+            </value>
+            <value>
+                <fullName>Under Graduation</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Under Graduation</label>
+            </value>
+            <value>
+                <fullName>XII</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>XII</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>
