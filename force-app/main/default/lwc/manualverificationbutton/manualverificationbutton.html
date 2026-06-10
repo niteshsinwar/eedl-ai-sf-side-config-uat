@@ -1,0 +1,15 @@
+<template>
+    <lightning-button 
+        label="Verify Application" 
+        variant="brand" 
+        onclick={handleClick}>
+    </lightning-button>
+
+    <template if:true={isLoading}>
+        <lightning-spinner alternative-text="Processing..."></lightning-spinner>
+    </template>
+
+    <template if:true={message}>
+        <p class="slds-text-color_success">{message}</p>
+    </template>
+</template>

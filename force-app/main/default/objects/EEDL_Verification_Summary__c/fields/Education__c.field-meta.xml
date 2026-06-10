@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Education__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <label>Education</label>
+    <referenceTo>Education__c</referenceTo>
+    <relationshipLabel>EEDL Verification Summaries</relationshipLabel>
+    <relationshipName>EEDL_Verification_Summaries_Edu</relationshipName>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

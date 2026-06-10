@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RecordType xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Online_Program</fullName>
+    <active>true</active>
+    <label>Online Program</label>
+    <picklistValues>
+        <picklist>Degree_Level__c</picklist>
+        <values>
+            <fullName>Bachelor%27s Degree</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Doctorate %28PhD%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>HSC</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Master%27s Degree</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Other</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Post Graduate Diploma</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>SSC</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Degree_Type__c</picklist>
+        <values>
+            <fullName>Bachelors</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Class 10%2FO Level%2FPre-High School %28US%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Class 11</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Doctoral</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Masters</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Others</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Post Graduate Programme%2FDiploma</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Professional</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Format__c</picklist>
+        <values>
+            <fullName>Distance%2FCorrespondence</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Full-time</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Online</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Part-time</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Graduation_Status__c</picklist>
+        <values>
+            <fullName>Graduated</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Opted out</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Under-graduate student</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+</RecordType>

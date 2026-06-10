@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Issue_Category_Validation</fullName>
+    <active>true</active>
+    <errorConditionFormula>OR(
+    /* 1) Name starts with RECOMMENDER/DECLARATION but category ≠ Details */
+    AND(
+        NOT( ISPICKVAL(Issue_Category__c, &quot;&quot;) ),
+        OR(
+            BEGINS( UPPER(TRIM(Name)), &quot;RECOMMENDER&quot; ),
+            BEGINS( UPPER(TRIM(Name)), &quot;DECLARATION&quot; )
+        ),
+        NOT( ISPICKVAL(Issue_Category__c, &quot;Details&quot;) )
+    ),
+    /* 2) Name starts with RESUME but category ≠ Document */
+    AND(
+        NOT( ISPICKVAL(Issue_Category__c, &quot;&quot;) ),
+        BEGINS( UPPER(TRIM(Name)), &quot;RESUME&quot; ),
+        NOT( ISPICKVAL(Issue_Category__c, &quot;Document&quot;) )
+    ),
+    /* 3) If confidence &gt; 95, any non‑blank picklist is invalid */
+    AND(
+        Percentage_Confidence__c &gt; 95,
+        /* picklist blank check */
+        NOT( ISPICKVAL(Issue_Category__c, &quot;&quot;) )
+    )
+)</errorConditionFormula>
+    <errorDisplayField>Issue_Category__c</errorDisplayField>
+    <errorMessage>Not Applicable</errorMessage>
+</ValidationRule>

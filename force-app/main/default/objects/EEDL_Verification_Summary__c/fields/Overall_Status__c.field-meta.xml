@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Overall_Status__c</fullName>
+    <label>Overall Status</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Passed</fullName>
+                <default>false</default>
+                <label>Passed</label>
+            </value>
+            <value>
+                <fullName>Failed</fullName>
+                <default>false</default>
+                <label>Failed</label>
+            </value>
+            <value>
+                <fullName>Needs Review</fullName>
+                <default>false</default>
+                <label>Needs Review</label>
+            </value>
+            <value>
+                <fullName>verified</fullName>
+                <default>false</default>
+                <label>verified</label>
+            </value>
+            <value>
+                <fullName>discrepancy_found</fullName>
+                <default>false</default>
+                <label>discrepancy_found</label>
+            </value>
+            <value>
+                <fullName>insufficient_data</fullName>
+                <default>false</default>
+                <label>insufficient_data</label>
+            </value>
+            <value>
+                <fullName>no_document</fullName>
+                <default>false</default>
+                <label>no_document</label>
+            </value>
+            <value>
+                <fullName>error</fullName>
+                <default>false</default>
+                <label>error</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>
