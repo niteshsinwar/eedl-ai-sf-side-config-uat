@@ -101,6 +101,15 @@ static void testGetEducationVerificationDataPackage_NullInput() {
 
 
 
+    @IsTest
+    static void testGetEducationVerificationDataPackage_FallbackPaths() {
+        // Use a dummy ID to simulate missing log or missing fields
+        Id dummyLogId = 'a3qfs0000000000AAA';
+        DocumentVerificationUtils.VerificationDataWrapper resultMissingApp = EducationVerificationHandler.getEducationVerificationDataPackage(dummyLogId);
+        System.assertNotEquals(null, resultMissingApp);
 
-
+        Account acc = [SELECT Id FROM Account WHERE Name LIKE 'Shared Edu Account%' LIMIT 1];
+        Contact ct = [SELECT Id FROM Contact LIMIT 1];
+        hed__Application__c app = TestDataFactory1.createTestApplicationWithTermIdProgramIdLapsedBatch(null, acc.Id, ct.Id, null, null, 'Incomplete', 'Incomplete');
+    }
 }

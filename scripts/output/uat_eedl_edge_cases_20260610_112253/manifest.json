@@ -1,0 +1,1548 @@
+﻿{
+    "runStamp":  "20260610_112253",
+    "orgAlias":  "ISB-UAT-New",
+    "instanceUrl":  "https://isbedu--uat.sandbox.my.salesforce.com",
+    "apiVersion":  "v67.0",
+    "cases":  [
+                  {
+                      "caseKey":  "EC01_AADHAAR_MATCH_BACHELOR",
+                      "files":  [
+                                    {
+                                        "title":  "EC01_Aadhaar_card_match",
+                                        "name":  "EC01_Aadhaar_card_match.png",
+                                        "lines":  [
+                                                      "AADHAAR CARD",
+                                                      "Name: UAT EC01 Anika Rao",
+                                                      "Citizenship: India",
+                                                      "Nationality: Indian",
+                                                      "Aadhaar Number: 1111 2222 3333",
+                                                      "Date of Birth: 01 Jan 1999"
+                                                  ],
+                                        "kind":  "png"
+                                    },
+                                    {
+                                        "title":  "EC01_bachelor_degree_certificate_match",
+                                        "name":  "EC01_bachelor_degree_certificate_match.png",
+                                        "lines":  [
+                                                      "BACHELOR DEGREE CERTIFICATE",
+                                                      "Student Name: UAT EC01 Anika Rao",
+                                                      "University: Northstar University",
+                                                      "Degree: Bachelors",
+                                                      "GPA: 8.6",
+                                                      "From: 2018-07-01",
+                                                      "To: 2022-05-31"
+                                                  ],
+                                        "kind":  "png"
+                                    }
+                                ],
+                      "education":  {
+                                        "Degree_Level__c":  "Bachelor\u0027s Degree",
+                                        "To__c":  "2022-05-31",
+                                        "GPA__c":  8.6,
+                                        "Degree_Type__c":  "Bachelors",
+                                        "University_Name__c":  "Northstar University",
+                                        "From__c":  "2018-07-01"
+                                    },
+                      "opportunityId":  "006fs000001Tv5iAAC",
+                      "opportunity":  {
+                                          "Name":  "UAT EC01 Anika Rao",
+                                          "APP_Citizeship__c":  "India"
+                                      },
+                      "educationId":  "a09fs000000yQR4AAM"
+                  },
+                  {
+                      "caseKey":  "EC02_AADHAAR_BLANK_CITIZENSHIP",
+                      "files":  [
+                                    {
+                                        "title":  "EC02_Aadhaar_card_citizenship_missing_on_record",
+                                        "name":  "EC02_Aadhaar_card_citizenship_missing_on_record.png",
+                                        "lines":  [
+                                                      "AADHAAR CARD",
+                                                      "Name: UAT EC02 Bharat Mehta",
+                                                      "Citizenship: India",
+                                                      "Nationality: Indian",
+                                                      "Aadhaar Number: 2222 3333 4444",
+                                                      "Date of Birth: 12 Feb 1998"
+                                                  ],
+                                        "kind":  "png"
+                                    },
+                                    {
+                                        "title":  "EC02_bachelor_degree_certificate_match",
+                                        "name":  "EC02_bachelor_degree_certificate_match.png",
+                                        "lines":  [
+                                                      "BACHELOR DEGREE CERTIFICATE",
+                                                      "Student Name: UAT EC02 Bharat Mehta",
+                                                      "University: Deccan Institute",
+                                                      "Degree: Bachelors",
+                                                      "GPA: 7.9",
+                                                      "From: 2017-08-01",
+                                                      "To: 2021-05-30"
+                                                  ],
+                                        "kind":  "png"
+                                    }
+                                ],
+                      "education":  {
+                                        "Degree_Level__c":  "Bachelor\u0027s Degree",
+                                        "To__c":  "2021-05-30",
+                                        "GPA__c":  7.9,
+                                        "Degree_Type__c":  "Bachelors",
+                                        "University_Name__c":  "Deccan Institute",
+                                        "From__c":  "2017-08-01"
+                                    },
+                      "opportunityId":  "006Ip000004Ad1IIAS",
+                      "opportunity":  {
+                                          "Name":  "UAT EC02 Bharat Mehta",
+                                          "APP_Citizeship__c":  null
+                                      },
+                      "educationId":  "a09Ip000001BpUTIA0"
+                  },
+                  {
+                      "caseKey":  "EC03_AADHAAR_CITIZENSHIP_MISMATCH",
+                      "files":  [
+                                    {
+                                        "title":  "EC03_Aadhaar_card_india_record_outside",
+                                        "name":  "EC03_Aadhaar_card_india_record_outside.png",
+                                        "lines":  [
+                                                      "AADHAAR CARD",
+                                                      "Name: UAT EC03 Chitra Nair",
+                                                      "Citizenship: India",
+                                                      "Nationality: Indian",
+                                                      "Aadhaar Number: 3333 4444 5555",
+                                                      "Date of Birth: 23 Mar 1997"
+                                                  ],
+                                        "kind":  "png"
+                                    },
+                                    {
+                                        "title":  "EC03_bachelor_degree_certificate_match",
+                                        "name":  "EC03_bachelor_degree_certificate_match.png",
+                                        "lines":  [
+                                                      "BACHELOR DEGREE CERTIFICATE",
+                                                      "Student Name: UAT EC03 Chitra Nair",
+                                                      "University: Coastal Technical University",
+                                                      "Degree: Bachelors",
+                                                      "GPA: 8.1",
+                                                      "From: 2016-07-01",
+                                                      "To: 2020-05-31"
+                                                  ],
+                                        "kind":  "png"
+                                    }
+                                ],
+                      "education":  {
+                                        "Degree_Level__c":  "Bachelor\u0027s Degree",
+                                        "To__c":  "2020-05-31",
+                                        "GPA__c":  8.1,
+                                        "Degree_Type__c":  "Bachelors",
+                                        "University_Name__c":  "Coastal Technical University",
+                                        "From__c":  "2016-07-01"
+                                    },
+                      "opportunityId":  "006fs000001VYo2AAG",
+                      "opportunity":  {
+                                          "Name":  "UAT EC03 Chitra Nair",
+                                          "APP_Citizeship__c":  "Outside India"
+                                      },
+                      "educationId":  "a09fs000001CRiLAAW"
+                  },
+                  {
+                      "caseKey":  "EC04_PASSPORT_OUTSIDE_INDIA_MATCH",
+                      "files":  [
+                                    {
+                                        "title":  "EC04_passport_outside_india_match",
+                                        "name":  "EC04_passport_outside_india_match.png",
+                                        "lines":  [
+                                                      "PASSPORT",
+                                                      "Name: UAT EC04 Daniel Smith",
+                                                      "Nationality: Canadian",
+                                                      "Citizenship: Canada",
+                                                      "Passport Number: C1234567",
+                                                      "Date of Birth: 04 Apr 1996"
+                                                  ],
+                                        "kind":  "png"
+                                    },
+                                    {
+                                        "title":  "EC04_master_degree_certificate_match",
+                                        "name":  "EC04_master_degree_certificate_match.png",
+                                        "lines":  [
+                                                      "MASTER DEGREE CERTIFICATE",
+                                                      "Student Name: UAT EC04 Daniel Smith",
+                                                      "University: Maple School of Business",
+                                                      "Degree: Masters",
+                                                      "GPA: 3.7",
+                                                      "From: 2019-09-01",
+                                                      "To: 2021-06-15"
+                                                  ],
+                                        "kind":  "png"
+                                    }
+                                ],
+                      "education":  {
+                                        "Degree_Level__c":  "Master\u0027s Degree",
+                                        "To__c":  "2021-06-15",
+                                        "GPA__c":  3.7,
+                                        "Degree_Type__c":  "Masters",
+                                        "University_Name__c":  "Maple School of Business",
+                                        "From__c":  "2019-09-01"
+                                    },
+                      "opportunityId":  "006Ip000004AdcJIAS",
+                      "opportunity":  {
+                                          "Name":  "UAT EC04 Daniel Smith",
+                                          "APP_Citizeship__c":  "Outside India"
+                                      },
+                      "educationId":  "a09fs000000BBxtAAG"
+                  },
+                  {
+                      "caseKey":  "EC05_PASSPORT_INDIA_EDU_GPA_MISMATCH",
+                      "files":  [
+                                    {
+                                        "title":  "EC05_passport_india_match",
+                                        "name":  "EC05_passport_india_match.png",
+                                        "lines":  [
+                                                      "PASSPORT",
+                                                      "Name: UAT EC05 Esha Iyer",
+                                                      "Nationality: Indian",
+                                                      "Citizenship: India",
+                                                      "Passport Number: Z7654321",
+                                                      "Date of Birth: 15 May 1995"
+                                                  ],
+                                        "kind":  "png"
+                                    },
+                                    {
+                                        "title":  "EC05_master_degree_certificate_gpa_mismatch",
+                                        "name":  "EC05_master_degree_certificate_gpa_mismatch.png",
+                                        "lines":  [
+                                                      "MASTER DEGREE CERTIFICATE",
+                                                      "Student Name: UAT EC05 Esha Iyer",
+                                                      "University: Riverbend University",
+                                                      "Degree: Masters",
+                                                      "GPA: 6.1",
+                                                      "From: 2020-08-01",
+                                                      "To: 2022-05-31"
+                                                  ],
+                                        "kind":  "png"
+                                    }
+                                ],
+                      "education":  {
+                                        "Degree_Level__c":  "Master\u0027s Degree",
+                                        "To__c":  "2022-05-31",
+                                        "GPA__c":  8.8,
+                                        "Degree_Type__c":  "Masters",
+                                        "University_Name__c":  "Riverbend University",
+                                        "From__c":  "2020-08-01"
+                                    },
+                      "opportunityId":  "006fs000000Vbw9AAC",
+                      "opportunity":  {
+                                          "Name":  "UAT EC05 Esha Iyer",
+                                          "APP_Citizeship__c":  "India"
+                                      },
+                      "educationId":  "a09fs0000006C3UAAU"
+                  },
+                  {
+                      "caseKey":  "EC06_INVALID_ID_DOCUMENT_TEXT",
+                      "files":  [
+                                    {
+                                        "title":  "EC06_Aadhaar_card_invalid_notice",
+                                        "name":  "EC06_Aadhaar_card_invalid_notice.png",
+                                        "lines":  [
+                                                      "UPLOAD ERROR SCREENSHOT",
+                                                      "The selected file could not be previewed.",
+                                                      "No identity card, Aadhaar number, passport number, name, nationality, or date of birth appears on this document.",
+                                                      "This is intentionally not a valid identity document."
+                                                  ],
+                                        "kind":  "png"
+                                    },
+                                    {
+                                        "title":  "EC06_bachelor_degree_certificate_match",
+                                        "name":  "EC06_bachelor_degree_certificate_match.png",
+                                        "lines":  [
+                                                      "BACHELOR DEGREE CERTIFICATE",
+                                                      "Student Name: UAT EC06 Farhan Ali",
+                                                      "University: Hillview College",
+                                                      "Degree: Bachelors",
+                                                      "GPA: 7.4",
+                                                      "From: 2015-07-01",
+                                                      "To: 2019-05-30"
+                                                  ],
+                                        "kind":  "png"
+                                    }
+                                ],
+                      "education":  {
+                                        "Degree_Level__c":  "Bachelor\u0027s Degree",
+                                        "To__c":  "2019-05-30",
+                                        "GPA__c":  7.4,
+                                        "Degree_Type__c":  "Bachelors",
+                                        "University_Name__c":  "Hillview College",
+                                        "From__c":  "2015-07-01"
+                                    },
+                      "opportunityId":  "006fs000000ifPFAAY",
+                      "opportunity":  {
+                                          "Name":  "UAT EC06 Farhan Ali",
+                                          "APP_Citizeship__c":  "India"
+                                      },
+                      "educationId":  "a09fs000000C0kDAAS"
+                  },
+                  {
+                      "caseKey":  "EC07_ID_NAME_MISMATCH",
+                      "files":  [
+                                    {
+                                        "title":  "EC07_Aadhaar_card_name_mismatch",
+                                        "name":  "EC07_Aadhaar_card_name_mismatch.png",
+                                        "lines":  [
+                                                      "AADHAAR CARD",
+                                                      "Name: UAT EC07 Wrong Person",
+                                                      "Citizenship: India",
+                                                      "Nationality: Indian",
+                                                      "Aadhaar Number: 7777 8888 9999",
+                                                      "Date of Birth: 07 Jul 1999"
+                                                  ],
+                                        "kind":  "png"
+                                    },
+                                    {
+                                        "title":  "EC07_bachelor_degree_certificate_match",
+                                        "name":  "EC07_bachelor_degree_certificate_match.png",
+                                        "lines":  [
+                                                      "BACHELOR DEGREE CERTIFICATE",
+                                                      "Student Name: UAT EC07 Gita Menon",
+                                                      "University: Eastern Arts University",
+                                                      "Degree: Bachelors",
+                                                      "GPA: 8.2",
+                                                      "From: 2018-06-01",
+                                                      "To: 2022-04-30"
+                                                  ],
+                                        "kind":  "png"
+                                    }
+                                ],
+                      "education":  {
+                                        "Degree_Level__c":  "Bachelor\u0027s Degree",
+                                        "To__c":  "2022-04-30",
+                                        "GPA__c":  8.2,
+                                        "Degree_Type__c":  "Bachelors",
+                                        "University_Name__c":  "Eastern Arts University",
+                                        "From__c":  "2018-06-01"
+                                    },
+                      "opportunityId":  "006fs000000w7fSAAQ",
+                      "opportunity":  {
+                                          "Name":  "UAT EC07 Gita Menon",
+                                          "APP_Citizeship__c":  "India"
+                                      },
+                      "educationId":  "a09fs000000ByNZAA0"
+                  },
+                  {
+                      "caseKey":  "EC08_EDUCATION_FILE_NOT_MATCHED",
+                      "files":  [
+                                    {
+                                        "title":  "EC08_Aadhaar_card_match",
+                                        "name":  "EC08_Aadhaar_card_match.png",
+                                        "lines":  [
+                                                      "AADHAAR CARD",
+                                                      "Name: UAT EC08 Harish Rao",
+                                                      "Citizenship: India",
+                                                      "Nationality: Indian",
+                                                      "Aadhaar Number: 8888 9999 0000",
+                                                      "Date of Birth: 08 Aug 1998"
+                                                  ],
+                                        "kind":  "png"
+                                    },
+                                    {
+                                        "title":  "EC08_bachelor_certificate_wrong_keyword",
+                                        "name":  "EC08_bachelor_certificate_wrong_keyword.png",
+                                        "lines":  [
+                                                      "BACHELOR DEGREE CERTIFICATE",
+                                                      "Student Name: UAT EC08 Harish Rao",
+                                                      "University: Western Management School",
+                                                      "Degree: Masters",
+                                                      "GPA: 8.0",
+                                                      "From: 2021-08-01",
+                                                      "To: 2023-05-31",
+                                                      "Filename intentionally uses bachelor keyword while record degree is Masters."
+                                                  ],
+                                        "kind":  "png"
+                                    }
+                                ],
+                      "education":  {
+                                        "Degree_Level__c":  "Master\u0027s Degree",
+                                        "To__c":  "2023-05-31",
+                                        "GPA__c":  8,
+                                        "Degree_Type__c":  "Masters",
+                                        "University_Name__c":  "Western Management School",
+                                        "From__c":  "2021-08-01"
+                                    },
+                      "opportunityId":  "006fs000000jU1yAAE",
+                      "opportunity":  {
+                                          "Name":  "UAT EC08 Harish Rao",
+                                          "APP_Citizeship__c":  "India"
+                                      },
+                      "educationId":  "a09fs000000BgLhAAK"
+                  },
+                  {
+                      "caseKey":  "EC09_CORRUPT_ID_PDF",
+                      "files":  [
+                                    {
+                                        "label":  "Corrupt Aadhaar PDF for extraction failure edge case.",
+                                        "title":  "EC09_Aadhaar_card_corrupt_pdf",
+                                        "name":  "EC09_Aadhaar_card_corrupt_pdf.pdf",
+                                        "kind":  "corruptPdf"
+                                    },
+                                    {
+                                        "title":  "EC09_bachelor_degree_certificate_match",
+                                        "name":  "EC09_bachelor_degree_certificate_match.png",
+                                        "lines":  [
+                                                      "BACHELOR DEGREE CERTIFICATE",
+                                                      "Student Name: UAT EC09 Ira Kapoor",
+                                                      "University: Sunrise Engineering College",
+                                                      "Degree: Bachelors",
+                                                      "GPA: 7.8",
+                                                      "From: 2017-07-01",
+                                                      "To: 2021-05-31"
+                                                  ],
+                                        "kind":  "png"
+                                    }
+                                ],
+                      "education":  {
+                                        "Degree_Level__c":  "Bachelor\u0027s Degree",
+                                        "To__c":  "2021-05-31",
+                                        "GPA__c":  7.8,
+                                        "Degree_Type__c":  "Bachelors",
+                                        "University_Name__c":  "Sunrise Engineering College",
+                                        "From__c":  "2017-07-01"
+                                    },
+                      "opportunityId":  "006fs000001P018AAC",
+                      "opportunity":  {
+                                          "Name":  "UAT EC09 Ira Kapoor",
+                                          "APP_Citizeship__c":  "India"
+                                      },
+                      "educationId":  "a09Ip000001BpH5IAK"
+                  },
+                  {
+                      "caseKey":  "EC10_CORRUPT_EDUCATION_PDF",
+                      "files":  [
+                                    {
+                                        "title":  "EC10_Aadhaar_card_match",
+                                        "name":  "EC10_Aadhaar_card_match.png",
+                                        "lines":  [
+                                                      "AADHAAR CARD",
+                                                      "Name: UAT EC10 Jai Sen",
+                                                      "Citizenship: India",
+                                                      "Nationality: Indian",
+                                                      "Aadhaar Number: 1010 2020 3030",
+                                                      "Date of Birth: 10 Oct 1999"
+                                                  ],
+                                        "kind":  "png"
+                                    },
+                                    {
+                                        "label":  "Corrupt bachelor education PDF for extraction failure edge case.",
+                                        "title":  "EC10_bachelor_degree_corrupt_pdf",
+                                        "name":  "EC10_bachelor_degree_corrupt_pdf.pdf",
+                                        "kind":  "corruptPdf"
+                                    }
+                                ],
+                      "education":  {
+                                        "Degree_Level__c":  "Bachelor\u0027s Degree",
+                                        "To__c":  "2022-05-31",
+                                        "GPA__c":  8.4,
+                                        "Degree_Type__c":  "Bachelors",
+                                        "University_Name__c":  "Central Science College",
+                                        "From__c":  "2018-07-01"
+                                    },
+                      "opportunityId":  "006fs0000010NgpAAE",
+                      "opportunity":  {
+                                          "Name":  "UAT EC10 Jai Sen",
+                                          "APP_Citizeship__c":  "India"
+                                      },
+                      "educationId":  "a09Ip000001BHsfIAG"
+                  }
+              ],
+    "originalOpportunities":  [
+                                  {
+                                      "attributes":  {
+                                                         "type":  "Opportunity",
+                                                         "url":  "/services/data/v67.0/sobjects/Opportunity/006Ip000004Ad1IIAS"
+                                                     },
+                                      "Id":  "006Ip000004Ad1IIAS",
+                                      "Name":  "Riya Nogia",
+                                      "StageName":  "Student",
+                                      "RecordType":  {
+                                                         "attributes":  {
+                                                                            "type":  "RecordType",
+                                                                            "url":  "/services/data/v67.0/sobjects/RecordType/0125j000000UQK4AAO"
+                                                                        },
+                                                         "DeveloperName":  "Online_Program"
+                                                     },
+                                      "ContactId":  "003J400000HCNvhIAH",
+                                      "APP_Contact__c":  "003J400000HCNvhIAH",
+                                      "APP_Citizeship__c":  "India",
+                                      "LastModifiedDate":  "2026-05-14T09:12:10.000+0000"
+                                  },
+                                  {
+                                      "attributes":  {
+                                                         "type":  "Opportunity",
+                                                         "url":  "/services/data/v67.0/sobjects/Opportunity/006Ip000004AdcJIAS"
+                                                     },
+                                      "Id":  "006Ip000004AdcJIAS",
+                                      "Name":  "Amar",
+                                      "StageName":  "Offer Open",
+                                      "RecordType":  {
+                                                         "attributes":  {
+                                                                            "type":  "RecordType",
+                                                                            "url":  "/services/data/v67.0/sobjects/RecordType/0125j000000UQK4AAO"
+                                                                        },
+                                                         "DeveloperName":  "Online_Program"
+                                                     },
+                                      "ContactId":  "003J400000MrygrIAB",
+                                      "APP_Contact__c":  "003J400000MrygrIAB",
+                                      "APP_Citizeship__c":  "India",
+                                      "LastModifiedDate":  "2026-05-04T08:16:52.000+0000"
+                                  },
+                                  {
+                                      "attributes":  {
+                                                         "type":  "Opportunity",
+                                                         "url":  "/services/data/v67.0/sobjects/Opportunity/006fs000000Vbw9AAC"
+                                                     },
+                                      "Id":  "006fs000000Vbw9AAC",
+                                      "Name":  "Jitendra",
+                                      "StageName":  "Offer Open",
+                                      "RecordType":  {
+                                                         "attributes":  {
+                                                                            "type":  "RecordType",
+                                                                            "url":  "/services/data/v67.0/sobjects/RecordType/0125j000000UQK4AAO"
+                                                                        },
+                                                         "DeveloperName":  "Online_Program"
+                                                     },
+                                      "ContactId":  "003J400000FfBowIAF",
+                                      "APP_Contact__c":  "003J400000FfBowIAF",
+                                      "APP_Citizeship__c":  "India",
+                                      "LastModifiedDate":  "2026-05-04T08:07:36.000+0000"
+                                  },
+                                  {
+                                      "attributes":  {
+                                                         "type":  "Opportunity",
+                                                         "url":  "/services/data/v67.0/sobjects/Opportunity/006fs000000ifPFAAY"
+                                                     },
+                                      "Id":  "006fs000000ifPFAAY",
+                                      "Name":  "Shivkumar",
+                                      "StageName":  "Student",
+                                      "RecordType":  {
+                                                         "attributes":  {
+                                                                            "type":  "RecordType",
+                                                                            "url":  "/services/data/v67.0/sobjects/RecordType/0125j000000UQK4AAO"
+                                                                        },
+                                                         "DeveloperName":  "Online_Program"
+                                                     },
+                                      "ContactId":  "003fs000000wzMWAAY",
+                                      "APP_Contact__c":  "003fs000000wzMWAAY",
+                                      "APP_Citizeship__c":  "India",
+                                      "LastModifiedDate":  "2026-04-23T10:12:13.000+0000"
+                                  },
+                                  {
+                                      "attributes":  {
+                                                         "type":  "Opportunity",
+                                                         "url":  "/services/data/v67.0/sobjects/Opportunity/006fs000000jU1yAAE"
+                                                     },
+                                      "Id":  "006fs000000jU1yAAE",
+                                      "Name":  "Rohit",
+                                      "StageName":  "Student",
+                                      "RecordType":  {
+                                                         "attributes":  {
+                                                                            "type":  "RecordType",
+                                                                            "url":  "/services/data/v67.0/sobjects/RecordType/0125j000000UQK4AAO"
+                                                                        },
+                                                         "DeveloperName":  "Online_Program"
+                                                     },
+                                      "ContactId":  "003fs000000wR9XAAU",
+                                      "APP_Contact__c":  "003fs000000wR9XAAU",
+                                      "APP_Citizeship__c":  null,
+                                      "LastModifiedDate":  "2026-02-25T09:54:54.000+0000"
+                                  },
+                                  {
+                                      "attributes":  {
+                                                         "type":  "Opportunity",
+                                                         "url":  "/services/data/v67.0/sobjects/Opportunity/006fs000000w7fSAAQ"
+                                                     },
+                                      "Id":  "006fs000000w7fSAAQ",
+                                      "Name":  "Divya",
+                                      "StageName":  "Student",
+                                      "RecordType":  {
+                                                         "attributes":  {
+                                                                            "type":  "RecordType",
+                                                                            "url":  "/services/data/v67.0/sobjects/RecordType/0125j000000UQK4AAO"
+                                                                        },
+                                                         "DeveloperName":  "Online_Program"
+                                                     },
+                                      "ContactId":  "003fs000000x00sAAA",
+                                      "APP_Contact__c":  "003fs000000x00sAAA",
+                                      "APP_Citizeship__c":  null,
+                                      "LastModifiedDate":  "2026-03-26T05:12:32.000+0000"
+                                  },
+                                  {
+                                      "attributes":  {
+                                                         "type":  "Opportunity",
+                                                         "url":  "/services/data/v67.0/sobjects/Opportunity/006fs0000010NgpAAE"
+                                                     },
+                                      "Id":  "006fs0000010NgpAAE",
+                                      "Name":  "Jayasri",
+                                      "StageName":  "Student",
+                                      "RecordType":  {
+                                                         "attributes":  {
+                                                                            "type":  "RecordType",
+                                                                            "url":  "/services/data/v67.0/sobjects/RecordType/0125j000000UQK4AAO"
+                                                                        },
+                                                         "DeveloperName":  "Online_Program"
+                                                     },
+                                      "ContactId":  "003Ip00000DzDTjIAN",
+                                      "APP_Contact__c":  "003Ip00000DzDTjIAN",
+                                      "APP_Citizeship__c":  null,
+                                      "LastModifiedDate":  "2026-03-24T05:51:56.000+0000"
+                                  },
+                                  {
+                                      "attributes":  {
+                                                         "type":  "Opportunity",
+                                                         "url":  "/services/data/v67.0/sobjects/Opportunity/006fs000001P018AAC"
+                                                     },
+                                      "Id":  "006fs000001P018AAC",
+                                      "Name":  "Selvasundari",
+                                      "StageName":  "Student",
+                                      "RecordType":  {
+                                                         "attributes":  {
+                                                                            "type":  "RecordType",
+                                                                            "url":  "/services/data/v67.0/sobjects/RecordType/0125j000000UQK4AAO"
+                                                                        },
+                                                         "DeveloperName":  "Online_Program"
+                                                     },
+                                      "ContactId":  "003Ip00000DzlVTIAZ",
+                                      "APP_Contact__c":  "003Ip00000DzlVTIAZ",
+                                      "APP_Citizeship__c":  null,
+                                      "LastModifiedDate":  "2026-03-24T05:52:19.000+0000"
+                                  },
+                                  {
+                                      "attributes":  {
+                                                         "type":  "Opportunity",
+                                                         "url":  "/services/data/v67.0/sobjects/Opportunity/006fs000001Tv5iAAC"
+                                                     },
+                                      "Id":  "006fs000001Tv5iAAC",
+                                      "Name":  "Nikhil B",
+                                      "StageName":  "Student",
+                                      "RecordType":  {
+                                                         "attributes":  {
+                                                                            "type":  "RecordType",
+                                                                            "url":  "/services/data/v67.0/sobjects/RecordType/0125j000000UQK4AAO"
+                                                                        },
+                                                         "DeveloperName":  "Online_Program"
+                                                     },
+                                      "ContactId":  "003fs000001exLpAAI",
+                                      "APP_Contact__c":  "003fs000001exLpAAI",
+                                      "APP_Citizeship__c":  null,
+                                      "LastModifiedDate":  "2026-05-26T09:53:53.000+0000"
+                                  },
+                                  {
+                                      "attributes":  {
+                                                         "type":  "Opportunity",
+                                                         "url":  "/services/data/v67.0/sobjects/Opportunity/006fs000001VYo2AAG"
+                                                     },
+                                      "Id":  "006fs000001VYo2AAG",
+                                      "Name":  "sparsh",
+                                      "StageName":  "Student",
+                                      "RecordType":  {
+                                                         "attributes":  {
+                                                                            "type":  "RecordType",
+                                                                            "url":  "/services/data/v67.0/sobjects/RecordType/0125j000000UQK4AAO"
+                                                                        },
+                                                         "DeveloperName":  "Online_Program"
+                                                     },
+                                      "ContactId":  "003fs00000201N3AAI",
+                                      "APP_Contact__c":  "003fs00000201N3AAI",
+                                      "APP_Citizeship__c":  null,
+                                      "LastModifiedDate":  "2026-05-07T11:10:19.000+0000"
+                                  }
+                              ],
+    "originalEducations":  [
+                               {
+                                   "attributes":  {
+                                                      "type":  "Education__c",
+                                                      "url":  "/services/data/v67.0/sobjects/Education__c/a09Ip000001BHsfIAG"
+                                                  },
+                                   "Id":  "a09Ip000001BHsfIAG",
+                                   "Name":  "E-077138",
+                                   "Contact__c":  "003Ip00000DzDTjIAN",
+                                   "Degree_Type__c":  null,
+                                   "Degree_Level__c":  null,
+                                   "Degree__c":  null,
+                                   "University_Name__c":  null,
+                                   "Name_of_the_University__c":  null,
+                                   "GPA__c":  null,
+                                   "From__c":  null,
+                                   "To__c":  null,
+                                   "LastModifiedDate":  "2025-07-17T12:44:49.000+0000"
+                               },
+                               {
+                                   "attributes":  {
+                                                      "type":  "Education__c",
+                                                      "url":  "/services/data/v67.0/sobjects/Education__c/a09Ip000001BpH5IAK"
+                                                  },
+                                   "Id":  "a09Ip000001BpH5IAK",
+                                   "Name":  "E-077152",
+                                   "Contact__c":  "003Ip00000DzlVTIAZ",
+                                   "Degree_Type__c":  null,
+                                   "Degree_Level__c":  null,
+                                   "Degree__c":  null,
+                                   "University_Name__c":  null,
+                                   "Name_of_the_University__c":  null,
+                                   "GPA__c":  null,
+                                   "From__c":  null,
+                                   "To__c":  null,
+                                   "LastModifiedDate":  "2025-08-05T11:08:33.000+0000"
+                               },
+                               {
+                                   "attributes":  {
+                                                      "type":  "Education__c",
+                                                      "url":  "/services/data/v67.0/sobjects/Education__c/a09Ip000001BpUTIA0"
+                                                  },
+                                   "Id":  "a09Ip000001BpUTIA0",
+                                   "Name":  "E-077154",
+                                   "Contact__c":  "003J400000HCNvhIAH",
+                                   "Degree_Type__c":  null,
+                                   "Degree_Level__c":  null,
+                                   "Degree__c":  null,
+                                   "University_Name__c":  null,
+                                   "Name_of_the_University__c":  null,
+                                   "GPA__c":  null,
+                                   "From__c":  null,
+                                   "To__c":  null,
+                                   "LastModifiedDate":  "2025-08-07T10:09:40.000+0000"
+                               },
+                               {
+                                   "attributes":  {
+                                                      "type":  "Education__c",
+                                                      "url":  "/services/data/v67.0/sobjects/Education__c/a09fs0000006C3UAAU"
+                                                  },
+                                   "Id":  "a09fs0000006C3UAAU",
+                                   "Name":  "E-077163",
+                                   "Contact__c":  "003J400000FfBowIAF",
+                                   "Degree_Type__c":  null,
+                                   "Degree_Level__c":  null,
+                                   "Degree__c":  null,
+                                   "University_Name__c":  null,
+                                   "Name_of_the_University__c":  null,
+                                   "GPA__c":  null,
+                                   "From__c":  null,
+                                   "To__c":  null,
+                                   "LastModifiedDate":  "2025-09-23T12:19:53.000+0000"
+                               },
+                               {
+                                   "attributes":  {
+                                                      "type":  "Education__c",
+                                                      "url":  "/services/data/v67.0/sobjects/Education__c/a09fs000000BBxtAAG"
+                                                  },
+                                   "Id":  "a09fs000000BBxtAAG",
+                                   "Name":  "E-077170",
+                                   "Contact__c":  "003J400000MrygrIAB",
+                                   "Degree_Type__c":  null,
+                                   "Degree_Level__c":  null,
+                                   "Degree__c":  null,
+                                   "University_Name__c":  null,
+                                   "Name_of_the_University__c":  null,
+                                   "GPA__c":  null,
+                                   "From__c":  null,
+                                   "To__c":  null,
+                                   "LastModifiedDate":  "2025-10-13T01:30:29.000+0000"
+                               },
+                               {
+                                   "attributes":  {
+                                                      "type":  "Education__c",
+                                                      "url":  "/services/data/v67.0/sobjects/Education__c/a09fs000000BgLhAAK"
+                                                  },
+                                   "Id":  "a09fs000000BgLhAAK",
+                                   "Name":  "E-077171",
+                                   "Contact__c":  "003fs000000wR9XAAU",
+                                   "Degree_Type__c":  null,
+                                   "Degree_Level__c":  null,
+                                   "Degree__c":  null,
+                                   "University_Name__c":  null,
+                                   "Name_of_the_University__c":  null,
+                                   "GPA__c":  null,
+                                   "From__c":  null,
+                                   "To__c":  null,
+                                   "LastModifiedDate":  "2025-10-14T07:41:51.000+0000"
+                               },
+                               {
+                                   "attributes":  {
+                                                      "type":  "Education__c",
+                                                      "url":  "/services/data/v67.0/sobjects/Education__c/a09fs000000ByNZAA0"
+                                                  },
+                                   "Id":  "a09fs000000ByNZAA0",
+                                   "Name":  "E-077173",
+                                   "Contact__c":  "003fs000000x00sAAA",
+                                   "Degree_Type__c":  null,
+                                   "Degree_Level__c":  null,
+                                   "Degree__c":  null,
+                                   "University_Name__c":  null,
+                                   "Name_of_the_University__c":  null,
+                                   "GPA__c":  null,
+                                   "From__c":  null,
+                                   "To__c":  null,
+                                   "LastModifiedDate":  "2025-10-15T07:37:58.000+0000"
+                               },
+                               {
+                                   "attributes":  {
+                                                      "type":  "Education__c",
+                                                      "url":  "/services/data/v67.0/sobjects/Education__c/a09fs000000C0kDAAS"
+                                                  },
+                                   "Id":  "a09fs000000C0kDAAS",
+                                   "Name":  "E-077172",
+                                   "Contact__c":  "003fs000000wzMWAAY",
+                                   "Degree_Type__c":  null,
+                                   "Degree_Level__c":  null,
+                                   "Degree__c":  null,
+                                   "University_Name__c":  null,
+                                   "Name_of_the_University__c":  null,
+                                   "GPA__c":  null,
+                                   "From__c":  null,
+                                   "To__c":  null,
+                                   "LastModifiedDate":  "2025-10-15T05:28:21.000+0000"
+                               },
+                               {
+                                   "attributes":  {
+                                                      "type":  "Education__c",
+                                                      "url":  "/services/data/v67.0/sobjects/Education__c/a09fs000000yQR4AAM"
+                                                  },
+                                   "Id":  "a09fs000000yQR4AAM",
+                                   "Name":  "E-077313",
+                                   "Contact__c":  "003fs000001exLpAAI",
+                                   "Degree_Type__c":  null,
+                                   "Degree_Level__c":  null,
+                                   "Degree__c":  null,
+                                   "University_Name__c":  null,
+                                   "Name_of_the_University__c":  null,
+                                   "GPA__c":  null,
+                                   "From__c":  null,
+                                   "To__c":  null,
+                                   "LastModifiedDate":  "2026-02-03T09:47:17.000+0000"
+                               },
+                               {
+                                   "attributes":  {
+                                                      "type":  "Education__c",
+                                                      "url":  "/services/data/v67.0/sobjects/Education__c/a09fs000001CRiLAAW"
+                                                  },
+                                   "Id":  "a09fs000001CRiLAAW",
+                                   "Name":  "E-077377",
+                                   "Contact__c":  "003fs00000201N3AAI",
+                                   "Degree_Type__c":  null,
+                                   "Degree_Level__c":  null,
+                                   "Degree__c":  null,
+                                   "University_Name__c":  null,
+                                   "Name_of_the_University__c":  null,
+                                   "GPA__c":  null,
+                                   "From__c":  null,
+                                   "To__c":  null,
+                                   "LastModifiedDate":  "2026-03-12T08:19:57.000+0000"
+                               }
+                           ],
+    "preExistingFiles":  [
+                             {
+                                 "attributes":  {
+                                                    "type":  "ContentDocumentLink",
+                                                    "url":  "/services/data/v67.0/sobjects/ContentDocumentLink/06Afs000000RArMEAW"
+                                                },
+                                 "LinkedEntityId":  "006Ip000004Ad1IIAS",
+                                 "ContentDocumentId":  "069fs000000L0D8AAK",
+                                 "ContentDocument":  {
+                                                         "attributes":  {
+                                                                            "type":  "ContentDocument",
+                                                                            "url":  "/services/data/v67.0/sobjects/ContentDocument/069fs000000L0D8AAK"
+                                                                        },
+                                                         "Title":  "Offer_Letter",
+                                                         "FileExtension":  "pdf",
+                                                         "LatestPublishedVersionId":  "068fs000000KiOIAA0"
+                                                     },
+                                 "SystemModstamp":  "2026-05-14T09:11:58.000+0000"
+                             },
+                             {
+                                 "attributes":  {
+                                                    "type":  "ContentDocumentLink",
+                                                    "url":  "/services/data/v67.0/sobjects/ContentDocumentLink/06Afs000000RBp0EAG"
+                                                },
+                                 "LinkedEntityId":  "006Ip000004Ad1IIAS",
+                                 "ContentDocumentId":  "069fs000000L19BAAS",
+                                 "ContentDocument":  {
+                                                         "attributes":  {
+                                                                            "type":  "ContentDocument",
+                                                                            "url":  "/services/data/v67.0/sobjects/ContentDocument/069fs000000L19BAAS"
+                                                                        },
+                                                         "Title":  "Offer_Letter",
+                                                         "FileExtension":  "pdf",
+                                                         "LatestPublishedVersionId":  "068fs000000KjLxAAK"
+                                                     },
+                                 "SystemModstamp":  "2026-05-14T09:10:32.000+0000"
+                             },
+                             {
+                                 "attributes":  {
+                                                    "type":  "ContentDocumentLink",
+                                                    "url":  "/services/data/v67.0/sobjects/ContentDocumentLink/06Afs000000PV2EEAW"
+                                                },
+                                 "LinkedEntityId":  "006Ip000004AdcJIAS",
+                                 "ContentDocumentId":  "069fs000000JprdAAC",
+                                 "ContentDocument":  {
+                                                         "attributes":  {
+                                                                            "type":  "ContentDocument",
+                                                                            "url":  "/services/data/v67.0/sobjects/ContentDocument/069fs000000JprdAAC"
+                                                                        },
+                                                         "Title":  "Offer_Letter",
+                                                         "FileExtension":  "pdf",
+                                                         "LatestPublishedVersionId":  "068fs000000JY4PAAW"
+                                                     },
+                                 "SystemModstamp":  "2026-05-04T08:16:47.000+0000"
+                             },
+                             {
+                                 "attributes":  {
+                                                    "type":  "ContentDocumentLink",
+                                                    "url":  "/services/data/v67.0/sobjects/ContentDocumentLink/06Afs000000OtkwEAC"
+                                                },
+                                 "LinkedEntityId":  "006Ip000004AdcJIAS",
+                                 "ContentDocumentId":  "069fs000000JMuTAAW",
+                                 "ContentDocument":  {
+                                                         "attributes":  {
+                                                                            "type":  "ContentDocument",
+                                                                            "url":  "/services/data/v67.0/sobjects/ContentDocument/069fs000000JMuTAAW"
+                                                                        },
+                                                         "Title":  "Offer_Letter",
+                                                         "FileExtension":  "pdf",
+                                                         "LatestPublishedVersionId":  "068fs000000J57FAAS"
+                                                     },
+                                 "SystemModstamp":  "2026-04-28T07:21:04.000+0000"
+                             },
+                             {
+                                 "attributes":  {
+                                                    "type":  "ContentDocumentLink",
+                                                    "url":  "/services/data/v67.0/sobjects/ContentDocumentLink/06Afs000000OsdaEAC"
+                                                },
+                                 "LinkedEntityId":  "006Ip000004AdcJIAS",
+                                 "ContentDocumentId":  "069fs000000JMEXAA4",
+                                 "ContentDocument":  {
+                                                         "attributes":  {
+                                                                            "type":  "ContentDocument",
+                                                                            "url":  "/services/data/v67.0/sobjects/ContentDocument/069fs000000JMEXAA4"
+                                                                        },
+                                                         "Title":  "Offer_Letter",
+                                                         "FileExtension":  "pdf",
+                                                         "LatestPublishedVersionId":  "068fs000000J4RJAA0"
+                                                     },
+                                 "SystemModstamp":  "2026-04-28T06:59:47.000+0000"
+                             },
+                             {
+                                 "attributes":  {
+                                                    "type":  "ContentDocumentLink",
+                                                    "url":  "/services/data/v67.0/sobjects/ContentDocumentLink/06Afs000000PT5KEAW"
+                                                },
+                                 "LinkedEntityId":  "006fs000000Vbw9AAC",
+                                 "ContentDocumentId":  "069fs000000JoApAAK",
+                                 "ContentDocument":  {
+                                                         "attributes":  {
+                                                                            "type":  "ContentDocument",
+                                                                            "url":  "/services/data/v67.0/sobjects/ContentDocument/069fs000000JoApAAK"
+                                                                        },
+                                                         "Title":  "Offer_Letter",
+                                                         "FileExtension":  "pdf",
+                                                         "LatestPublishedVersionId":  "068fs000000JWNbAAO"
+                                                     },
+                                 "SystemModstamp":  "2026-05-04T08:07:30.000+0000"
+                             },
+                             {
+                                 "attributes":  {
+                                                    "type":  "ContentDocumentLink",
+                                                    "url":  "/services/data/v67.0/sobjects/ContentDocumentLink/06Afs000000OKTsEAO"
+                                                },
+                                 "LinkedEntityId":  "006fs000000ifPFAAY",
+                                 "ContentDocumentId":  "069fs000000IrPGAA0",
+                                 "ContentDocument":  {
+                                                         "attributes":  {
+                                                                            "type":  "ContentDocument",
+                                                                            "url":  "/services/data/v67.0/sobjects/ContentDocument/069fs000000IrPGAA0"
+                                                                        },
+                                                         "Title":  "Offer_Letter",
+                                                         "FileExtension":  "pdf",
+                                                         "LatestPublishedVersionId":  "068fs000000IZQlAAO"
+                                                     },
+                                 "SystemModstamp":  "2026-04-23T10:04:08.000+0000"
+                             },
+                             {
+                                 "attributes":  {
+                                                    "type":  "ContentDocumentLink",
+                                                    "url":  "/services/data/v67.0/sobjects/ContentDocumentLink/06Afs000000OKSEEA4"
+                                                },
+                                 "LinkedEntityId":  "006fs000000ifPFAAY",
+                                 "ContentDocumentId":  "069fs000000IrNdAAK",
+                                 "ContentDocument":  {
+                                                         "attributes":  {
+                                                                            "type":  "ContentDocument",
+                                                                            "url":  "/services/data/v67.0/sobjects/ContentDocument/069fs000000IrNdAAK"
+                                                                        },
+                                                         "Title":  "Offer_Letter",
+                                                         "FileExtension":  "pdf",
+                                                         "LatestPublishedVersionId":  "068fs000000IZP7AAO"
+                                                     },
+                                 "SystemModstamp":  "2026-04-23T06:26:27.000+0000"
+                             }
+                         ],
+    "uploadedFiles":  [
+                          {
+                              "caseKey":  "EC01_AADHAAR_MATCH_BACHELOR",
+                              "opportunityId":  "006fs000001Tv5iAAC",
+                              "title":  "EC01_Aadhaar_card_match",
+                              "fileExtension":  "png",
+                              "contentVersionId":  "068fs000000NFXyAAO",
+                              "contentDocumentId":  "069fs000000NRR4AAO",
+                              "localPath":  "C:\\Users\\NSinwar\\Documents\\ISB Project Files\\AI Server Configs\\isb-ai-server-salesforce\\scripts\\output\\uat_eedl_edge_cases_20260610_112253\\files\\EC01_Aadhaar_card_match.png"
+                          },
+                          {
+                              "caseKey":  "EC01_AADHAAR_MATCH_BACHELOR",
+                              "opportunityId":  "006fs000001Tv5iAAC",
+                              "title":  "EC01_bachelor_degree_certificate_match",
+                              "fileExtension":  "png",
+                              "contentVersionId":  "068fs000000NGSHAA4",
+                              "contentDocumentId":  "069fs000000NSLNAA4",
+                              "localPath":  "C:\\Users\\NSinwar\\Documents\\ISB Project Files\\AI Server Configs\\isb-ai-server-salesforce\\scripts\\output\\uat_eedl_edge_cases_20260610_112253\\files\\EC01_bachelor_degree_certificate_match.png"
+                          },
+                          {
+                              "caseKey":  "EC02_AADHAAR_BLANK_CITIZENSHIP",
+                              "opportunityId":  "006Ip000004Ad1IIAS",
+                              "title":  "EC02_Aadhaar_card_citizenship_missing_on_record",
+                              "fileExtension":  "png",
+                              "contentVersionId":  "068fs000000NGTtAAO",
+                              "contentDocumentId":  "069fs000000NSMzAAO",
+                              "localPath":  "C:\\Users\\NSinwar\\Documents\\ISB Project Files\\AI Server Configs\\isb-ai-server-salesforce\\scripts\\output\\uat_eedl_edge_cases_20260610_112253\\files\\EC02_Aadhaar_card_citizenship_missing_on_record.png"
+                          },
+                          {
+                              "caseKey":  "EC02_AADHAAR_BLANK_CITIZENSHIP",
+                              "opportunityId":  "006Ip000004Ad1IIAS",
+                              "title":  "EC02_bachelor_degree_certificate_match",
+                              "fileExtension":  "png",
+                              "contentVersionId":  "068fs000000NGVVAA4",
+                              "contentDocumentId":  "069fs000000NSObAAO",
+                              "localPath":  "C:\\Users\\NSinwar\\Documents\\ISB Project Files\\AI Server Configs\\isb-ai-server-salesforce\\scripts\\output\\uat_eedl_edge_cases_20260610_112253\\files\\EC02_bachelor_degree_certificate_match.png"
+                          },
+                          {
+                              "caseKey":  "EC03_AADHAAR_CITIZENSHIP_MISMATCH",
+                              "opportunityId":  "006fs000001VYo2AAG",
+                              "title":  "EC03_Aadhaar_card_india_record_outside",
+                              "fileExtension":  "png",
+                              "contentVersionId":  "068fs000000NGX7AAO",
+                              "contentDocumentId":  "069fs000000NSQDAA4",
+                              "localPath":  "C:\\Users\\NSinwar\\Documents\\ISB Project Files\\AI Server Configs\\isb-ai-server-salesforce\\scripts\\output\\uat_eedl_edge_cases_20260610_112253\\files\\EC03_Aadhaar_card_india_record_outside.png"
+                          },
+                          {
+                              "caseKey":  "EC03_AADHAAR_CITIZENSHIP_MISMATCH",
+                              "opportunityId":  "006fs000001VYo2AAG",
+                              "title":  "EC03_bachelor_degree_certificate_match",
+                              "fileExtension":  "png",
+                              "contentVersionId":  "068fs000000NG2VAAW",
+                              "contentDocumentId":  "069fs000000NRvbAAG",
+                              "localPath":  "C:\\Users\\NSinwar\\Documents\\ISB Project Files\\AI Server Configs\\isb-ai-server-salesforce\\scripts\\output\\uat_eedl_edge_cases_20260610_112253\\files\\EC03_bachelor_degree_certificate_match.png"
+                          },
+                          {
+                              "caseKey":  "EC04_PASSPORT_OUTSIDE_INDIA_MATCH",
+                              "opportunityId":  "006Ip000004AdcJIAS",
+                              "title":  "EC04_passport_outside_india_match",
+                              "fileExtension":  "png",
+                              "contentVersionId":  "068fs000000NGYjAAO",
+                              "contentDocumentId":  "069fs000000NSRpAAO",
+                              "localPath":  "C:\\Users\\NSinwar\\Documents\\ISB Project Files\\AI Server Configs\\isb-ai-server-salesforce\\scripts\\output\\uat_eedl_edge_cases_20260610_112253\\files\\EC04_passport_outside_india_match.png"
+                          },
+                          {
+                              "caseKey":  "EC04_PASSPORT_OUTSIDE_INDIA_MATCH",
+                              "opportunityId":  "006Ip000004AdcJIAS",
+                              "title":  "EC04_master_degree_certificate_match",
+                              "fileExtension":  "png",
+                              "contentVersionId":  "068fs000000NGaLAAW",
+                              "contentDocumentId":  "069fs000000NSTRAA4",
+                              "localPath":  "C:\\Users\\NSinwar\\Documents\\ISB Project Files\\AI Server Configs\\isb-ai-server-salesforce\\scripts\\output\\uat_eedl_edge_cases_20260610_112253\\files\\EC04_master_degree_certificate_match.png"
+                          },
+                          {
+                              "caseKey":  "EC05_PASSPORT_INDIA_EDU_GPA_MISMATCH",
+                              "opportunityId":  "006fs000000Vbw9AAC",
+                              "title":  "EC05_passport_india_match",
+                              "fileExtension":  "png",
+                              "contentVersionId":  "068fs000000NGbxAAG",
+                              "contentDocumentId":  "069fs000000NSV3AAO",
+                              "localPath":  "C:\\Users\\NSinwar\\Documents\\ISB Project Files\\AI Server Configs\\isb-ai-server-salesforce\\scripts\\output\\uat_eedl_edge_cases_20260610_112253\\files\\EC05_passport_india_match.png"
+                          },
+                          {
+                              "caseKey":  "EC05_PASSPORT_INDIA_EDU_GPA_MISMATCH",
+                              "opportunityId":  "006fs000000Vbw9AAC",
+                              "title":  "EC05_master_degree_certificate_gpa_mismatch",
+                              "fileExtension":  "png",
+                              "contentVersionId":  "068fs000000NGKEAA4",
+                              "contentDocumentId":  "069fs000000NSDKAA4",
+                              "localPath":  "C:\\Users\\NSinwar\\Documents\\ISB Project Files\\AI Server Configs\\isb-ai-server-salesforce\\scripts\\output\\uat_eedl_edge_cases_20260610_112253\\files\\EC05_master_degree_certificate_gpa_mismatch.png"
+                          },
+                          {
+                              "caseKey":  "EC06_INVALID_ID_DOCUMENT_TEXT",
+                              "opportunityId":  "006fs000000ifPFAAY",
+                              "title":  "EC06_Aadhaar_card_invalid_notice",
+                              "fileExtension":  "png",
+                              "contentVersionId":  "068fs000000NGTuAAO",
+                              "contentDocumentId":  "069fs000000NSN0AAO",
+                              "localPath":  "C:\\Users\\NSinwar\\Documents\\ISB Project Files\\AI Server Configs\\isb-ai-server-salesforce\\scripts\\output\\uat_eedl_edge_cases_20260610_112253\\files\\EC06_Aadhaar_card_invalid_notice.png"
+                          },
+                          {
+                              "caseKey":  "EC06_INVALID_ID_DOCUMENT_TEXT",
+                              "opportunityId":  "006fs000000ifPFAAY",
+                              "title":  "EC06_bachelor_degree_certificate_match",
+                              "fileExtension":  "png",
+                              "contentVersionId":  "068fs000000NGVWAA4",
+                              "contentDocumentId":  "069fs000000NSOcAAO",
+                              "localPath":  "C:\\Users\\NSinwar\\Documents\\ISB Project Files\\AI Server Configs\\isb-ai-server-salesforce\\scripts\\output\\uat_eedl_edge_cases_20260610_112253\\files\\EC06_bachelor_degree_certificate_match.png"
+                          },
+                          {
+                              "caseKey":  "EC07_ID_NAME_MISMATCH",
+                              "opportunityId":  "006fs000000w7fSAAQ",
+                              "title":  "EC07_Aadhaar_card_name_mismatch",
+                              "fileExtension":  "png",
+                              "contentVersionId":  "068fs000000NGdZAAW",
+                              "contentDocumentId":  "069fs000000NSWfAAO",
+                              "localPath":  "C:\\Users\\NSinwar\\Documents\\ISB Project Files\\AI Server Configs\\isb-ai-server-salesforce\\scripts\\output\\uat_eedl_edge_cases_20260610_112253\\files\\EC07_Aadhaar_card_name_mismatch.png"
+                          },
+                          {
+                              "caseKey":  "EC07_ID_NAME_MISMATCH",
+                              "opportunityId":  "006fs000000w7fSAAQ",
+                              "title":  "EC07_bachelor_degree_certificate_match",
+                              "fileExtension":  "png",
+                              "contentVersionId":  "068fs000000NGfBAAW",
+                              "contentDocumentId":  "069fs000000NSYHAA4",
+                              "localPath":  "C:\\Users\\NSinwar\\Documents\\ISB Project Files\\AI Server Configs\\isb-ai-server-salesforce\\scripts\\output\\uat_eedl_edge_cases_20260610_112253\\files\\EC07_bachelor_degree_certificate_match.png"
+                          },
+                          {
+                              "caseKey":  "EC08_EDUCATION_FILE_NOT_MATCHED",
+                              "opportunityId":  "006fs000000jU1yAAE",
+                              "title":  "EC08_Aadhaar_card_match",
+                              "fileExtension":  "png",
+                              "contentVersionId":  "068fs000000NGgnAAG",
+                              "contentDocumentId":  "069fs000000NSZtAAO",
+                              "localPath":  "C:\\Users\\NSinwar\\Documents\\ISB Project Files\\AI Server Configs\\isb-ai-server-salesforce\\scripts\\output\\uat_eedl_edge_cases_20260610_112253\\files\\EC08_Aadhaar_card_match.png"
+                          },
+                          {
+                              "caseKey":  "EC08_EDUCATION_FILE_NOT_MATCHED",
+                              "opportunityId":  "006fs000000jU1yAAE",
+                              "title":  "EC08_bachelor_certificate_wrong_keyword",
+                              "fileExtension":  "png",
+                              "contentVersionId":  "068fs000000NGgoAAG",
+                              "contentDocumentId":  "069fs000000NSZuAAO",
+                              "localPath":  "C:\\Users\\NSinwar\\Documents\\ISB Project Files\\AI Server Configs\\isb-ai-server-salesforce\\scripts\\output\\uat_eedl_edge_cases_20260610_112253\\files\\EC08_bachelor_certificate_wrong_keyword.png"
+                          },
+                          {
+                              "caseKey":  "EC09_CORRUPT_ID_PDF",
+                              "opportunityId":  "006fs000001P018AAC",
+                              "title":  "EC09_Aadhaar_card_corrupt_pdf",
+                              "fileExtension":  "pdf",
+                              "contentVersionId":  "068fs000000NGfCAAW",
+                              "contentDocumentId":  "069fs000000NSYIAA4",
+                              "localPath":  "C:\\Users\\NSinwar\\Documents\\ISB Project Files\\AI Server Configs\\isb-ai-server-salesforce\\scripts\\output\\uat_eedl_edge_cases_20260610_112253\\files\\EC09_Aadhaar_card_corrupt_pdf.pdf"
+                          },
+                          {
+                              "caseKey":  "EC09_CORRUPT_ID_PDF",
+                              "opportunityId":  "006fs000001P018AAC",
+                              "title":  "EC09_bachelor_degree_certificate_match",
+                              "fileExtension":  "png",
+                              "contentVersionId":  "068fs000000NGiPAAW",
+                              "contentDocumentId":  "069fs000000NSbVAAW",
+                              "localPath":  "C:\\Users\\NSinwar\\Documents\\ISB Project Files\\AI Server Configs\\isb-ai-server-salesforce\\scripts\\output\\uat_eedl_edge_cases_20260610_112253\\files\\EC09_bachelor_degree_certificate_match.png"
+                          },
+                          {
+                              "caseKey":  "EC10_CORRUPT_EDUCATION_PDF",
+                              "opportunityId":  "006fs0000010NgpAAE",
+                              "title":  "EC10_Aadhaar_card_match",
+                              "fileExtension":  "png",
+                              "contentVersionId":  "068fs000000NGiQAAW",
+                              "contentDocumentId":  "069fs000000NSbWAAW",
+                              "localPath":  "C:\\Users\\NSinwar\\Documents\\ISB Project Files\\AI Server Configs\\isb-ai-server-salesforce\\scripts\\output\\uat_eedl_edge_cases_20260610_112253\\files\\EC10_Aadhaar_card_match.png"
+                          },
+                          {
+                              "caseKey":  "EC10_CORRUPT_EDUCATION_PDF",
+                              "opportunityId":  "006fs0000010NgpAAE",
+                              "title":  "EC10_bachelor_degree_corrupt_pdf",
+                              "fileExtension":  "pdf",
+                              "contentVersionId":  "068fs000000NGk1AAG",
+                              "contentDocumentId":  "069fs000000NSd7AAG",
+                              "localPath":  "C:\\Users\\NSinwar\\Documents\\ISB Project Files\\AI Server Configs\\isb-ai-server-salesforce\\scripts\\output\\uat_eedl_edge_cases_20260610_112253\\files\\EC10_bachelor_degree_corrupt_pdf.pdf"
+                          }
+                      ],
+    "postOpportunities":  [
+                              {
+                                  "attributes":  {
+                                                     "type":  "Opportunity",
+                                                     "url":  "/services/data/v67.0/sobjects/Opportunity/006Ip000004Ad1IIAS"
+                                                 },
+                                  "Id":  "006Ip000004Ad1IIAS",
+                                  "Name":  "UAT EC02 Bharat Mehta",
+                                  "StageName":  "Student",
+                                  "RecordType":  {
+                                                     "attributes":  {
+                                                                        "type":  "RecordType",
+                                                                        "url":  "/services/data/v67.0/sobjects/RecordType/0125j000000UQK4AAO"
+                                                                    },
+                                                     "DeveloperName":  "Online_Program"
+                                                 },
+                                  "ContactId":  "003J400000HCNvhIAH",
+                                  "APP_Contact__c":  "003J400000HCNvhIAH",
+                                  "APP_Citizeship__c":  null,
+                                  "LastModifiedDate":  "2026-06-10T05:53:19.000+0000"
+                              },
+                              {
+                                  "attributes":  {
+                                                     "type":  "Opportunity",
+                                                     "url":  "/services/data/v67.0/sobjects/Opportunity/006Ip000004AdcJIAS"
+                                                 },
+                                  "Id":  "006Ip000004AdcJIAS",
+                                  "Name":  "UAT EC04 Daniel Smith",
+                                  "StageName":  "Offer Open",
+                                  "RecordType":  {
+                                                     "attributes":  {
+                                                                        "type":  "RecordType",
+                                                                        "url":  "/services/data/v67.0/sobjects/RecordType/0125j000000UQK4AAO"
+                                                                    },
+                                                     "DeveloperName":  "Online_Program"
+                                                 },
+                                  "ContactId":  "003J400000MrygrIAB",
+                                  "APP_Contact__c":  "003J400000MrygrIAB",
+                                  "APP_Citizeship__c":  "Outside India",
+                                  "LastModifiedDate":  "2026-06-10T05:53:35.000+0000"
+                              },
+                              {
+                                  "attributes":  {
+                                                     "type":  "Opportunity",
+                                                     "url":  "/services/data/v67.0/sobjects/Opportunity/006fs000000Vbw9AAC"
+                                                 },
+                                  "Id":  "006fs000000Vbw9AAC",
+                                  "Name":  "UAT EC05 Esha Iyer",
+                                  "StageName":  "Offer Open",
+                                  "RecordType":  {
+                                                     "attributes":  {
+                                                                        "type":  "RecordType",
+                                                                        "url":  "/services/data/v67.0/sobjects/RecordType/0125j000000UQK4AAO"
+                                                                    },
+                                                     "DeveloperName":  "Online_Program"
+                                                 },
+                                  "ContactId":  "003J400000FfBowIAF",
+                                  "APP_Contact__c":  "003J400000FfBowIAF",
+                                  "APP_Citizeship__c":  "India",
+                                  "LastModifiedDate":  "2026-06-10T05:53:44.000+0000"
+                              },
+                              {
+                                  "attributes":  {
+                                                     "type":  "Opportunity",
+                                                     "url":  "/services/data/v67.0/sobjects/Opportunity/006fs000000ifPFAAY"
+                                                 },
+                                  "Id":  "006fs000000ifPFAAY",
+                                  "Name":  "UAT EC06 Farhan Ali",
+                                  "StageName":  "Student",
+                                  "RecordType":  {
+                                                     "attributes":  {
+                                                                        "type":  "RecordType",
+                                                                        "url":  "/services/data/v67.0/sobjects/RecordType/0125j000000UQK4AAO"
+                                                                    },
+                                                     "DeveloperName":  "Online_Program"
+                                                 },
+                                  "ContactId":  "003fs000000wzMWAAY",
+                                  "APP_Contact__c":  "003fs000000wzMWAAY",
+                                  "APP_Citizeship__c":  "India",
+                                  "LastModifiedDate":  "2026-06-10T05:53:55.000+0000"
+                              },
+                              {
+                                  "attributes":  {
+                                                     "type":  "Opportunity",
+                                                     "url":  "/services/data/v67.0/sobjects/Opportunity/006fs000000jU1yAAE"
+                                                 },
+                                  "Id":  "006fs000000jU1yAAE",
+                                  "Name":  "UAT EC08 Harish Rao",
+                                  "StageName":  "Student",
+                                  "RecordType":  {
+                                                     "attributes":  {
+                                                                        "type":  "RecordType",
+                                                                        "url":  "/services/data/v67.0/sobjects/RecordType/0125j000000UQK4AAO"
+                                                                    },
+                                                     "DeveloperName":  "Online_Program"
+                                                 },
+                                  "ContactId":  "003fs000000wR9XAAU",
+                                  "APP_Contact__c":  "003fs000000wR9XAAU",
+                                  "APP_Citizeship__c":  "India",
+                                  "LastModifiedDate":  "2026-06-10T05:54:11.000+0000"
+                              },
+                              {
+                                  "attributes":  {
+                                                     "type":  "Opportunity",
+                                                     "url":  "/services/data/v67.0/sobjects/Opportunity/006fs000000w7fSAAQ"
+                                                 },
+                                  "Id":  "006fs000000w7fSAAQ",
+                                  "Name":  "UAT EC07 Gita Menon",
+                                  "StageName":  "Student",
+                                  "RecordType":  {
+                                                     "attributes":  {
+                                                                        "type":  "RecordType",
+                                                                        "url":  "/services/data/v67.0/sobjects/RecordType/0125j000000UQK4AAO"
+                                                                    },
+                                                     "DeveloperName":  "Online_Program"
+                                                 },
+                                  "ContactId":  "003fs000000x00sAAA",
+                                  "APP_Contact__c":  "003fs000000x00sAAA",
+                                  "APP_Citizeship__c":  "India",
+                                  "LastModifiedDate":  "2026-06-10T05:54:03.000+0000"
+                              },
+                              {
+                                  "attributes":  {
+                                                     "type":  "Opportunity",
+                                                     "url":  "/services/data/v67.0/sobjects/Opportunity/006fs0000010NgpAAE"
+                                                 },
+                                  "Id":  "006fs0000010NgpAAE",
+                                  "Name":  "UAT EC10 Jai Sen",
+                                  "StageName":  "Student",
+                                  "RecordType":  {
+                                                     "attributes":  {
+                                                                        "type":  "RecordType",
+                                                                        "url":  "/services/data/v67.0/sobjects/RecordType/0125j000000UQK4AAO"
+                                                                    },
+                                                     "DeveloperName":  "Online_Program"
+                                                 },
+                                  "ContactId":  "003Ip00000DzDTjIAN",
+                                  "APP_Contact__c":  "003Ip00000DzDTjIAN",
+                                  "APP_Citizeship__c":  "India",
+                                  "LastModifiedDate":  "2026-06-10T05:54:35.000+0000"
+                              },
+                              {
+                                  "attributes":  {
+                                                     "type":  "Opportunity",
+                                                     "url":  "/services/data/v67.0/sobjects/Opportunity/006fs000001P018AAC"
+                                                 },
+                                  "Id":  "006fs000001P018AAC",
+                                  "Name":  "UAT EC09 Ira Kapoor",
+                                  "StageName":  "Student",
+                                  "RecordType":  {
+                                                     "attributes":  {
+                                                                        "type":  "RecordType",
+                                                                        "url":  "/services/data/v67.0/sobjects/RecordType/0125j000000UQK4AAO"
+                                                                    },
+                                                     "DeveloperName":  "Online_Program"
+                                                 },
+                                  "ContactId":  "003Ip00000DzlVTIAZ",
+                                  "APP_Contact__c":  "003Ip00000DzlVTIAZ",
+                                  "APP_Citizeship__c":  "India",
+                                  "LastModifiedDate":  "2026-06-10T05:54:24.000+0000"
+                              },
+                              {
+                                  "attributes":  {
+                                                     "type":  "Opportunity",
+                                                     "url":  "/services/data/v67.0/sobjects/Opportunity/006fs000001Tv5iAAC"
+                                                 },
+                                  "Id":  "006fs000001Tv5iAAC",
+                                  "Name":  "UAT EC01 Anika Rao",
+                                  "StageName":  "Student",
+                                  "RecordType":  {
+                                                     "attributes":  {
+                                                                        "type":  "RecordType",
+                                                                        "url":  "/services/data/v67.0/sobjects/RecordType/0125j000000UQK4AAO"
+                                                                    },
+                                                     "DeveloperName":  "Online_Program"
+                                                 },
+                                  "ContactId":  "003fs000001exLpAAI",
+                                  "APP_Contact__c":  "003fs000001exLpAAI",
+                                  "APP_Citizeship__c":  "India",
+                                  "LastModifiedDate":  "2026-06-10T05:53:09.000+0000"
+                              },
+                              {
+                                  "attributes":  {
+                                                     "type":  "Opportunity",
+                                                     "url":  "/services/data/v67.0/sobjects/Opportunity/006fs000001VYo2AAG"
+                                                 },
+                                  "Id":  "006fs000001VYo2AAG",
+                                  "Name":  "UAT EC03 Chitra Nair",
+                                  "StageName":  "Student",
+                                  "RecordType":  {
+                                                     "attributes":  {
+                                                                        "type":  "RecordType",
+                                                                        "url":  "/services/data/v67.0/sobjects/RecordType/0125j000000UQK4AAO"
+                                                                    },
+                                                     "DeveloperName":  "Online_Program"
+                                                 },
+                                  "ContactId":  "003fs00000201N3AAI",
+                                  "APP_Contact__c":  "003fs00000201N3AAI",
+                                  "APP_Citizeship__c":  "Outside India",
+                                  "LastModifiedDate":  "2026-06-10T05:53:26.000+0000"
+                              }
+                          ],
+    "postEducations":  [
+                           {
+                               "attributes":  {
+                                                  "type":  "Education__c",
+                                                  "url":  "/services/data/v67.0/sobjects/Education__c/a09Ip000001BHsfIAG"
+                                              },
+                               "Id":  "a09Ip000001BHsfIAG",
+                               "Name":  "E-077138",
+                               "Contact__c":  "003Ip00000DzDTjIAN",
+                               "Degree_Type__c":  "Bachelors",
+                               "Degree_Level__c":  "Bachelor\u0027s Degree",
+                               "Degree__c":  null,
+                               "University_Name__c":  "Central Science College",
+                               "Name_of_the_University__c":  null,
+                               "GPA__c":  8.4,
+                               "From__c":  "2018-07-01",
+                               "To__c":  "2022-05-31",
+                               "LastModifiedDate":  "2026-06-10T05:54:33.000+0000"
+                           },
+                           {
+                               "attributes":  {
+                                                  "type":  "Education__c",
+                                                  "url":  "/services/data/v67.0/sobjects/Education__c/a09Ip000001BpH5IAK"
+                                              },
+                               "Id":  "a09Ip000001BpH5IAK",
+                               "Name":  "E-077152",
+                               "Contact__c":  "003Ip00000DzlVTIAZ",
+                               "Degree_Type__c":  "Bachelors",
+                               "Degree_Level__c":  "Bachelor\u0027s Degree",
+                               "Degree__c":  null,
+                               "University_Name__c":  "Sunrise Engineering College",
+                               "Name_of_the_University__c":  null,
+                               "GPA__c":  7.8,
+                               "From__c":  "2017-07-01",
+                               "To__c":  "2021-05-31",
+                               "LastModifiedDate":  "2026-06-10T05:54:22.000+0000"
+                           },
+                           {
+                               "attributes":  {
+                                                  "type":  "Education__c",
+                                                  "url":  "/services/data/v67.0/sobjects/Education__c/a09Ip000001BpUTIA0"
+                                              },
+                               "Id":  "a09Ip000001BpUTIA0",
+                               "Name":  "E-077154",
+                               "Contact__c":  "003J400000HCNvhIAH",
+                               "Degree_Type__c":  "Bachelors",
+                               "Degree_Level__c":  "Bachelor\u0027s Degree",
+                               "Degree__c":  null,
+                               "University_Name__c":  "Deccan Institute",
+                               "Name_of_the_University__c":  null,
+                               "GPA__c":  7.9,
+                               "From__c":  "2017-08-01",
+                               "To__c":  "2021-05-30",
+                               "LastModifiedDate":  "2026-06-10T05:53:16.000+0000"
+                           },
+                           {
+                               "attributes":  {
+                                                  "type":  "Education__c",
+                                                  "url":  "/services/data/v67.0/sobjects/Education__c/a09fs0000006C3UAAU"
+                                              },
+                               "Id":  "a09fs0000006C3UAAU",
+                               "Name":  "E-077163",
+                               "Contact__c":  "003J400000FfBowIAF",
+                               "Degree_Type__c":  "Masters",
+                               "Degree_Level__c":  "Master\u0027s Degree",
+                               "Degree__c":  null,
+                               "University_Name__c":  "Riverbend University",
+                               "Name_of_the_University__c":  null,
+                               "GPA__c":  8.8,
+                               "From__c":  "2020-08-01",
+                               "To__c":  "2022-05-31",
+                               "LastModifiedDate":  "2026-06-10T05:53:42.000+0000"
+                           },
+                           {
+                               "attributes":  {
+                                                  "type":  "Education__c",
+                                                  "url":  "/services/data/v67.0/sobjects/Education__c/a09fs000000BBxtAAG"
+                                              },
+                               "Id":  "a09fs000000BBxtAAG",
+                               "Name":  "E-077170",
+                               "Contact__c":  "003J400000MrygrIAB",
+                               "Degree_Type__c":  "Masters",
+                               "Degree_Level__c":  "Master\u0027s Degree",
+                               "Degree__c":  null,
+                               "University_Name__c":  "Maple School of Business",
+                               "Name_of_the_University__c":  null,
+                               "GPA__c":  3.7,
+                               "From__c":  "2019-09-01",
+                               "To__c":  "2021-06-15",
+                               "LastModifiedDate":  "2026-06-10T05:53:33.000+0000"
+                           },
+                           {
+                               "attributes":  {
+                                                  "type":  "Education__c",
+                                                  "url":  "/services/data/v67.0/sobjects/Education__c/a09fs000000BgLhAAK"
+                                              },
+                               "Id":  "a09fs000000BgLhAAK",
+                               "Name":  "E-077171",
+                               "Contact__c":  "003fs000000wR9XAAU",
+                               "Degree_Type__c":  "Masters",
+                               "Degree_Level__c":  "Master\u0027s Degree",
+                               "Degree__c":  null,
+                               "University_Name__c":  "Western Management School",
+                               "Name_of_the_University__c":  null,
+                               "GPA__c":  8.0,
+                               "From__c":  "2021-08-01",
+                               "To__c":  "2023-05-31",
+                               "LastModifiedDate":  "2026-06-10T05:54:09.000+0000"
+                           },
+                           {
+                               "attributes":  {
+                                                  "type":  "Education__c",
+                                                  "url":  "/services/data/v67.0/sobjects/Education__c/a09fs000000ByNZAA0"
+                                              },
+                               "Id":  "a09fs000000ByNZAA0",
+                               "Name":  "E-077173",
+                               "Contact__c":  "003fs000000x00sAAA",
+                               "Degree_Type__c":  "Bachelors",
+                               "Degree_Level__c":  "Bachelor\u0027s Degree",
+                               "Degree__c":  null,
+                               "University_Name__c":  "Eastern Arts University",
+                               "Name_of_the_University__c":  null,
+                               "GPA__c":  8.2,
+                               "From__c":  "2018-06-01",
+                               "To__c":  "2022-04-30",
+                               "LastModifiedDate":  "2026-06-10T05:54:01.000+0000"
+                           },
+                           {
+                               "attributes":  {
+                                                  "type":  "Education__c",
+                                                  "url":  "/services/data/v67.0/sobjects/Education__c/a09fs000000C0kDAAS"
+                                              },
+                               "Id":  "a09fs000000C0kDAAS",
+                               "Name":  "E-077172",
+                               "Contact__c":  "003fs000000wzMWAAY",
+                               "Degree_Type__c":  "Bachelors",
+                               "Degree_Level__c":  "Bachelor\u0027s Degree",
+                               "Degree__c":  null,
+                               "University_Name__c":  "Hillview College",
+                               "Name_of_the_University__c":  null,
+                               "GPA__c":  7.4,
+                               "From__c":  "2015-07-01",
+                               "To__c":  "2019-05-30",
+                               "LastModifiedDate":  "2026-06-10T05:53:54.000+0000"
+                           },
+                           {
+                               "attributes":  {
+                                                  "type":  "Education__c",
+                                                  "url":  "/services/data/v67.0/sobjects/Education__c/a09fs000000yQR4AAM"
+                                              },
+                               "Id":  "a09fs000000yQR4AAM",
+                               "Name":  "E-077313",
+                               "Contact__c":  "003fs000001exLpAAI",
+                               "Degree_Type__c":  "Bachelors",
+                               "Degree_Level__c":  "Bachelor\u0027s Degree",
+                               "Degree__c":  null,
+                               "University_Name__c":  "Northstar University",
+                               "Name_of_the_University__c":  null,
+                               "GPA__c":  8.6,
+                               "From__c":  "2018-07-01",
+                               "To__c":  "2022-05-31",
+                               "LastModifiedDate":  "2026-06-10T05:53:07.000+0000"
+                           },
+                           {
+                               "attributes":  {
+                                                  "type":  "Education__c",
+                                                  "url":  "/services/data/v67.0/sobjects/Education__c/a09fs000001CRiLAAW"
+                                              },
+                               "Id":  "a09fs000001CRiLAAW",
+                               "Name":  "E-077377",
+                               "Contact__c":  "003fs00000201N3AAI",
+                               "Degree_Type__c":  "Bachelors",
+                               "Degree_Level__c":  "Bachelor\u0027s Degree",
+                               "Degree__c":  null,
+                               "University_Name__c":  "Coastal Technical University",
+                               "Name_of_the_University__c":  null,
+                               "GPA__c":  8.1,
+                               "From__c":  "2016-07-01",
+                               "To__c":  "2020-05-31",
+                               "LastModifiedDate":  "2026-06-10T05:53:25.000+0000"
+                           }
+                       ]
+}

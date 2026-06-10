@@ -21,14 +21,118 @@ public class AIServerJobTriggerHandler {
     private static final Set<String> EXCLUDED_FROM_AUTO_UPDATE = new Set<String>{
         'EDUCATION', 'TEST_SCORE', 'EMPLOYMENT'
     };
-    private static final Set<String> RETRY_KEYWORDS = new Set<String>{
-        'crew', 'jwt', 'session', 'server error. status: internal server error, body: internal server error', 'auth', 'expir'
+    // Category: retriable, no escalation. These are normally transient queue,
+    // worker, or LLM-output failures where another scheduler pass can succeed.
+    private static final Set<String> RETRY_ERROR_PATTERNS = new Set<String>{
+        '(^|[^a-z0-9])crew([^a-z0-9]|$)',
+        '(^|[^a-z0-9])jwt([^a-z0-9]|$)',
+        '(^|[^a-z0-9])session([^a-z0-9]|$)',
+        'expir',
+        'server error.*internal server error',
+        'server error.*too many requests',
+        'queue full',
+        'worker process error',
+        'worker process failed',
+        'failed to spawn worker process',
+        'produced no output',
+        'invalid result structure',
+        'worker communication failed',
+        'maximum execution time',
+        'ai model failed during ocr processing',
+        'smart extraction failed',
+        'could not extract json from llm response',
+        'failed to decode json',
+        'validation errors for validated.*report',
+        'pydantic.*validation',
+        'field required.*pydantic',
+        'graph execution did not return a valid report',
+        'graph execution failed to produce final report',
+        'failed to produce final report',
+        'crew task failed',
+        'crew execution failed'
     };
-    private static final Set<String> ALERT_DOWN_KEYWORDS = new Set<String>{
-        'Read timed out', 'timeout', 'timed out', 'connection refused', 'host unreachable'
+    // Category: non-retriable, escalation required. These usually indicate the
+    // callout path, certificates, network, quota, or service credentials are
+    // broken and more jobs will continue failing until the system is fixed.
+    private static final Set<String> ALERT_DOWN_PATTERNS = new Set<String>{
+        'pkix',
+        'certificate_unknown',
+        'certification path',
+        'unable to tunnel through proxy',
+        'proxy returns',
+        'read timed out',
+        'read timeout',
+        'connect timeout',
+        'timed out',
+        'timeout',
+        'connection refused',
+        'connection reset',
+        'connection aborted',
+        'failed to establish a new connection',
+        'max retries exceeded',
+        'remote disconnected',
+        'remotedisconnected',
+        'remote end closed connection',
+        'host unreachable',
+        'service unavailable',
+        'temporarily unavailable',
+        'dns',
+        'name resolution',
+        'ssl',
+        'api key not valid',
+        'permission denied',
+        'failed_precondition',
+        'salesforce client credentials must be set',
+        'client credentials token request failed',
+        'failed to retrieve access_token',
+        'no apex endpoint path configured',
+        'salesforce client session not properly initialized',
+        'failed to query for existing ai server job',
+        'failed to update/create ai server job record',
+        'upsert for ai server job record failed'
     };
-    private static final Set<String> ALERT_QUOTA_KEYWORDS = new Set<String>{
-        'Quota exceeded', 'Rate limit', '429', 'Resource exhausted'
+    private static final Set<String> ALERT_QUOTA_PATTERNS = new Set<String>{
+        'quota exceeded',
+        'rate limit',
+        'resource exhausted',
+        'requests per minute',
+        'tokens per minute',
+        '(^|[^0-9])429([^0-9]|$)'
+    };
+    // Category: non-retriable, no escalation. These are usually limited to the
+    // individual source record or document payload and need record cleanup.
+    private static final Set<String> NON_RETRY_ERROR_PATTERNS = new Set<String>{
+        'invalid salesforce record_id format',
+        'invalid application_id format',
+        'invalid opportunity_id format',
+        'invalid salesforce id format',
+        'no processing record found',
+        'document payload was missing',
+        'contact id is missing',
+        'could not identify the underlying',
+        'document content \\(base64\\) or file extension missing',
+        'file has not been decrypted',
+        'invalid base64 input',
+        'unsupported file format',
+        'unable to process input image',
+        'input token count exceeds',
+        'maximum number of tokens allowed',
+        'context is too long',
+        'context too long',
+        'no attached document found',
+        'could not find any contentdocumentlink',
+        'found contentversion.*no.*versiondata',
+        'contentversion.*no versiondata',
+        'no id document file found',
+        'no aadhaar/passport file found',
+        'no document file matched',
+        'opportunity .* not found',
+        'opportunity .* has no contact lookup',
+        'education record .* not found',
+        '404 client error: not found',
+        'missing document or invalid data',
+        'invalid argument',
+        'nonetype.*invoke'
     };
 
     // Constants
@@ -77,36 +181,44 @@ public class AIServerJobTriggerHandler {
                 String details = (newRec.Message__c != null) ? newRec.Message__c.toLowerCase() : '';
                 Boolean isAlertError = false;
 
-                // Check for alert conditions first
+                // Classify current Python API failures before falling back to retry.
+                // Terminal data/config/document problems should remain failed even if a nested
+                // provider response contains an old generic "internal server error" string.
                 if (!String.isBlank(details)) {
-                    if (containsAny(details, ALERT_DOWN_KEYWORDS)) {
+                    if (matchesAnyPattern(details, NON_RETRY_ERROR_PATTERNS)) {
+                        continue;
+                    }
+                    if (matchesAnyPattern(details, ALERT_DOWN_PATTERNS)) {
                         sendOperationalAlert('DOWN', newRec);
                         isAlertError = true;
-                    } else if (containsAny(details, ALERT_QUOTA_KEYWORDS)) {
+                    } else if (matchesAnyPattern(details, ALERT_QUOTA_PATTERNS)) {
                         sendOperationalAlert('QUOTA', newRec);
                         isAlertError = true;
                     }
                 }
 
                 // Only requeue if not an alert-worthy error
-                if (!isAlertError) {
-                    for (String kw : RETRY_KEYWORDS) {
-                        if (details.contains(kw)) {
-                            newRec.Status__c = STATUS_QUEUED;
-                            break;
-                        }
-                    }
+                if (!isAlertError && matchesAnyPattern(details, RETRY_ERROR_PATTERNS)) {
+                    newRec.Status__c = STATUS_QUEUED;
                 }
             }
         }
     }
-        private static Boolean containsAny(String haystack, Set<String> needles) {
-    String h = (haystack == null) ? '' : haystack.toLowerCase();
-    for (String n : needles) {
-        if (h.contains(n == null ? '' : n.toLowerCase())) return true;
+
+    private static Boolean matchesAnyPattern(String haystack, Set<String> regexPatterns) {
+        String normalized = (haystack == null) ? '' : haystack.toLowerCase();
+        for (String regex : regexPatterns) {
+            if (String.isBlank(regex)) continue;
+            try {
+                if (Pattern.compile(regex).matcher(normalized).find()) {
+                    return true;
+                }
+            } catch (Exception e) {
+                System.debug(LoggingLevel.WARN, 'Invalid AI Server error pattern ignored: ' + regex);
+            }
+        }
+        return false;
     }
-    return false;
-}
 
     private class AlertCtx {
         String recordId;
@@ -169,7 +281,11 @@ public class AIServerJobTriggerHandler {
                     'AI Server Monitoring System';
             }
 
-            sendEmail(r.Email__c.trim(), subject, body);
+            try {
+                sendEmail(r.Email__c.trim(), subject, body);
+            } catch (Exception e) {
+                System.debug(LoggingLevel.ERROR, 'Failed to send AI Server operational alert: ' + e.getMessage());
+            }
         }
     }
 

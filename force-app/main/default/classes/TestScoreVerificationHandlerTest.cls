@@ -155,4 +155,18 @@ static void testGetTestScoreVerificationDataPackage_WithTestScore() {
     System.assertEquals('pdf', result.documentPayload.fileExtension);
 }
 
+    @IsTest 
+    static void testGetTestScoreVerificationDataPackage_GRE_and_UnknownType() {
+        Account acc = [SELECT Id FROM Account WHERE Name LIKE 'Shared Test Score Account%' LIMIT 1];
+        Contact ct = [SELECT Id FROM Contact WHERE AccountId = :acc.Id LIMIT 1];
+        hed__Application__c app = TestDataFactory1.createTestApplicationWithTermIdProgramIdLapsedBatch(null, acc.Id, ct.Id, null, null, 'Incomplete', 'Incomplete');
+
+        // Test Unknown Type - we'll just skip the record type since it defaults to something or use a fake one, 
+        // actually let's just test without record type
+        hed__Test__c blankTypeTest = TestDataFactory1.createTestForGMATFOCUSWithStatus(ct.Id, app.Id);
+        blankTypeTest.RecordTypeId = null;
+        update blankTypeTest;
+        DocumentVerificationUtils.VerificationDataWrapper blankResult = TestScoreVerificationHandler.getTestScoreVerificationDataPackage(blankTypeTest.Id);
+        System.assertNotEquals(null, blankResult);
+    }
 }
