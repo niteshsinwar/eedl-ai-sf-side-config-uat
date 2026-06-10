@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>Personal Detail Analysis</label>
+    <protected>false</protected>
+    <values>
+        <field>Template_Body__c</field>
+        <value xsi:type="xsd:string">Clear and legible scan copy of passport (Front &amp; Back) OR masked Aadhar (non-password protected)		
+Clear and legible scan copy of government ID proof (Non-Password protected)</value>
+    </values>
+</CustomMetadata>
