@@ -2,6 +2,7 @@
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>Doc_Last_Modified__c</fullName>
     <label>Doc Last Modified</label>
-    <type>DateTime</type>
     <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>DateTime</type>
 </CustomField>

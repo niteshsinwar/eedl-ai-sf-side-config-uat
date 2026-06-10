@@ -7,5 +7,6 @@
     <relationshipLabel>EEDL Verification Summaries</relationshipLabel>
     <relationshipName>EEDL_Verification_Summaries</relationshipName>
     <required>false</required>
+    <trackTrending>false</trackTrending>
     <type>Lookup</type>
 </CustomField>

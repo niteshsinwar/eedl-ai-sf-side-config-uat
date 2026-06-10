@@ -2,7 +2,7 @@
  * @description       : 
  * @author            : Anshul Verma
  * @group             : 
- * @last modified on  : 02-06-2026
+ * @last modified on  : 21-05-2026
  * @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
 **/
 trigger CEE_OpportunityTrigger on Opportunity (before update,after insert,after update,before insert) {
@@ -32,6 +32,8 @@ trigger CEE_OpportunityTrigger on Opportunity (before update,after insert,after 
             if(needsPaxUpdate) {
                 CEE_OpportunityTriggerHandler.paxFieldUpdate(Trigger.new);
             }
+            // ISB-5954: Sync Invoice address fields to linked Contact on insert
+            CEE_OpportunityTriggerHandler.syncInvoiceAddressToContact(Trigger.new, null);
             
             if(map_DeferralOppsForOLI.size() > 0){
                 try{
@@ -221,24 +223,6 @@ trigger CEE_OpportunityTrigger on Opportunity (before update,after insert,after 
                 if(lockRecordsOppList.size() > 0){
                     CEE_OpportunityTriggerHandler.LockEducationWorkexRecords(lockRecordsOppList, Trigger.oldMap);
                 }
-                
-                List<Opportunity> oppListForLMS2Callout = new List<Opportunity>();
-
-                for(Opportunity opp : trigger.new){
-                    if(opp.RecordTypeId == onlineProgOppRecordType){
-                    
-                    Opportunity oldOpp = Trigger.oldMap.get(opp.Id);
-                    if( opp.StageName == 'Student' && opp.StageName != oldOpp.StageName ){
-                        oppListForLMS2Callout.add(opp);
-                    }
-
-                    }
-                }
-
-                CEE_OpportunityTriggerHandler.LMSCalloutForStudentStage(oppListForLMS2Callout, Trigger.oldMap);
-
-                CEE_OpportunityTriggerHandler.unenrolUsersForLostOpportunities(Trigger.new, Trigger.oldMap);
-
 
                 //CEE_OpportunityTriggerHandler.Sendmailstocandidates(Trigger.newMap);
             }
@@ -270,6 +254,20 @@ trigger CEE_OpportunityTrigger on Opportunity (before update,after insert,after 
                 }
                 if(contactFieldsChanged) {
                     CEE_OpportunityTriggerHandler.paxFieldUpdate(Trigger.new);
+                }
+                // ISB-5954: Sync Invoice address fields to linked Contact on update
+                Boolean invoiceFieldsChanged = false;
+                for(String OppId : trigger.oldMap.keyset()){
+                    if(trigger.newMap.get(OppId).APP_Contact__c != Null &&
+                       (trigger.newMap.get(OppId).APP_InvoiceCity__c    != trigger.oldMap.get(OppId).APP_InvoiceCity__c    ||
+                        trigger.newMap.get(OppId).APP_InvoiceState__c   != trigger.oldMap.get(OppId).APP_InvoiceState__c   ||
+                        trigger.newMap.get(OppId).APP_InvoiceCountry__c != trigger.oldMap.get(OppId).APP_InvoiceCountry__c)) {
+                        invoiceFieldsChanged = true;
+                        break;
+                    }
+                }
+                if(invoiceFieldsChanged) {
+                    CEE_OpportunityTriggerHandler.syncInvoiceAddressToContact(Trigger.new, Trigger.oldMap);
                 }
                 Map<Id,Opportunity>  map_NewOpportuntiesById = new Map<Id,Opportunity>();
                 for(Opportunity Opp : trigger.new){
@@ -471,8 +469,13 @@ trigger CEE_OpportunityTrigger on Opportunity (before update,after insert,after 
                 CEE_OpportunityTriggerHandler.recalculateConvertedOpps(Trigger.new, Trigger.oldMap);                
                 CEE_OpportunityTriggerHandler.LXPCalloutForStudentStage(Trigger.new, Trigger.oldMap); //LXP 1.0 Integration callout EE DL - Added by Anitha for ISB-4808
                 CEE_OpportunityTriggerHandler.revokeLXPAccessForLostOpportunities(Trigger.new, Trigger.oldMap); //LXP 1.0 Integration callout for revoking access EE DL - Added by Anitha for ISB-4808
-                CEE_OpportunityTriggerHandler.triggerEEDLVerification(Trigger.new, Trigger.oldMap);
+                Boolean isLXP2Enabled = System.Label.Lxp2SyncSwitch != null && System.Label.Lxp2SyncSwitch.trim().toLowerCase() == 'on';
+                if(isLXP2Enabled){
+                    CEE_OpportunityTriggerHandler.LMSCalloutForStudentStage(Trigger.new, Trigger.oldMap);//LXP 2.0
+                    CEE_OpportunityTriggerHandler.unenrolUsersForLostOpportunities(Trigger.new, Trigger.oldMap);//LXP 2.0
+                }
                 CEE_OpportunityTriggerHandler.deleteOLIsOnBackwardMovement(Trigger.new, Trigger.oldMap);
+                CEE_OpportunityTriggerHandler.triggerEEDLVerification(Trigger.new, Trigger.oldMap);
             }
         }
        

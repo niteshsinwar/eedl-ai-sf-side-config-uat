@@ -1018,6 +1018,7 @@ map_EmailByUserId.put(objCurUser.email,objCurUser.Id);
     }
     
 
+
     public Static void UpdateOwnerID(Map<Id ,Opportunity> newMapOpp){
         system.debug('inside');
         Id devRecordTypeId = Schema.SObjectType.Lead.getRecordTypeInfosByName().get('ExecEd').getRecordTypeId();
@@ -3536,6 +3537,172 @@ con.Locale__c = null;*/
             }
         } catch (Exception e) {
             System.debug(LoggingLevel.ERROR, 'triggerEEDLVerification: ' + e.getMessage());
+        }
+    }
+
+    /**
+     * @description Validates and handles backward stage movements on Opportunity.
+     *              Stage flow (forward): Application in Progress → Applicant → Offer Open → Student / Lost
+     *
+     *              Rules:
+     *              1. Offer Open → Applicant  : Allowed only when no installment payment is 'Paid'.
+     *                                          Blocked with error if any schedule is paid.
+     *              2. Applicant → Application in Progress : Allowed only for the BD (Opportunity Owner).
+     *                                          Sets APP_Form_Submit__c = false on success.
+     *              3. All other backward moves : Blocked with a validation error.
+     *
+     * Called from: trigger before update
+     */
+    public static void handleBackwardStageMovement(List<Opportunity> newOpps, Map<Id, Opportunity> oldMap) {
+
+        // Stage names sourced from Custom Labels to avoid hardcoding
+        String stageAppInProgress = System.Label.CLCEE00029; // 'Application in progress'
+        String stageApplicant     = System.Label.Applicant_Stage;                // 'Applicant'
+        String stageOfferOpen     = System.Label.Stage_OfferOpen;                // 'Offer Open'
+
+        // Ordered stage index – higher index = further forward in the funnel
+        Map<String, Integer> stageOrder = new Map<String, Integer>{
+            stageAppInProgress => 0,
+            stageApplicant     => 1,
+            stageOfferOpen     => 2,
+            'Student'          => 3
+        };
+
+        // Collect Opp IDs moving Offer Open → Applicant for the bulk payment check
+        Set<Id> oppsOfferOpenToApplicant = new Set<Id>();
+
+        for (Opportunity opp : newOpps) {
+            String oldStage = oldMap.get(opp.Id).StageName;
+            String newStage = opp.StageName;
+
+            if (oldStage == newStage) continue;
+            if (!stageOrder.containsKey(oldStage) || !stageOrder.containsKey(newStage)) continue;
+
+            Integer oldOrder = stageOrder.get(oldStage);
+            Integer newOrder = stageOrder.get(newStage);
+
+            if (newOrder >= oldOrder) continue; // Forward movement – no restriction here
+
+            // --- Backward movement detected ---
+
+            if (oldStage == stageOfferOpen && newStage == stageApplicant) {
+                // Defer the payment check to after the loop (bulk-safe SOQL)
+                oppsOfferOpenToApplicant.add(opp.Id);
+
+            } else if (oldStage == stageApplicant && newStage == stageAppInProgress) {
+                opp.APP_Form_Submit__c = false;
+
+            } else {
+                // All other backward movements are not permitted
+                opp.addError('Backward stage movement from "' + oldStage + '" to "' + newStage + '" is not permitted.');
+            }
+        }
+
+        // Bulk payment check for Offer Open → Applicant movements
+        if (!oppsOfferOpenToApplicant.isEmpty()) {
+
+            // An installment is considered paid when OpportunityLineItemSchedule.Payment_Status__c = 'Paid'
+            Set<Id> paidOppIds = new Set<Id>();
+
+            for (OpportunityLineItemSchedule sch : [
+                SELECT OpportunityLineItem.OpportunityId
+                FROM   OpportunityLineItemSchedule
+                WHERE  OpportunityLineItem.OpportunityId IN :oppsOfferOpenToApplicant
+                AND    Payment_Status__c = 'Paid'
+            ]) {
+                paidOppIds.add(sch.OpportunityLineItem.OpportunityId);
+            }
+
+            for (Opportunity opp : newOpps) {
+                if (!oppsOfferOpenToApplicant.contains(opp.Id)) continue;
+
+                if (paidOppIds.contains(opp.Id)) {
+                    opp.addError(
+                        'Cannot move the stage back to "' + stageApplicant + '". Payment has already been received for this Opportunity. Please contact the Finance team.'
+                    );
+                }
+                // If no payment received: stage change is allowed.
+                // Associated OLIs will be deleted in the after-update handler (deleteOLIsOnBackwardMovement).
+            }
+        }
+    }
+
+    /**
+     * @description Deletes all OpportunityLineItems when the stage moves backward
+     *              from Offer Open → Applicant.  The before-update validation in
+     *              handleBackwardStageMovement ensures this fires only for
+     *              opportunities with no paid installments.
+     *
+     * Called from: trigger after update
+     */
+    public static void deleteOLIsOnBackwardMovement(List<Opportunity> newOpps, Map<Id, Opportunity> oldMap) {
+
+        String stageApplicant = System.Label.Applicant_Stage;
+        String stageOfferOpen = System.Label.Stage_OfferOpen;
+
+        Set<Id> oppsToDeleteOLIs = new Set<Id>();
+
+        for (Opportunity opp : newOpps) {
+            if (oldMap.get(opp.Id).StageName == stageOfferOpen && opp.StageName == stageApplicant) {
+                oppsToDeleteOLIs.add(opp.Id);
+            }
+        }
+
+        if (!oppsToDeleteOLIs.isEmpty()) {
+            List<OpportunityLineItem> olisToDelete = [
+                SELECT Id
+                FROM   OpportunityLineItem
+                WHERE  OpportunityId IN :oppsToDeleteOLIs
+            ];
+            if (!olisToDelete.isEmpty()) {
+                delete olisToDelete;
+            }
+        }
+    }
+
+    // ISB-5954: Sync Invoice To Address Fields (City, State, Country) from Opportunity to the linked Contact.
+    // Fires on after insert (oldMap = null) and after update when any invoice address field changes.
+    public static void syncInvoiceAddressToContact(List<Opportunity> newOpportunities, Map<Id, Opportunity> oldMap) {
+        Id openLDP = Schema.SObjectType.Opportunity.getRecordTypeInfosByName().get('CEE-Open-LDP').getRecordTypeId();
+        Id openSDP = Schema.SObjectType.Opportunity.getRecordTypeInfosByName().get('CEE-Open-SDP').getRecordTypeId();
+        Id openHR  = Schema.SObjectType.Opportunity.getRecordTypeInfosByName().get('CEE-HR').getRecordTypeId();
+        Id onlineProg = Schema.SObjectType.Opportunity.getRecordTypeInfosByName().get('Online Program').getRecordTypeId();
+        Map<Id, Opportunity> mapContactIdAndOpp = new Map<Id, Opportunity>();
+        for (Opportunity opp : newOpportunities) {
+            if (opp.APP_Contact__c != null
+                    && (opp.RecordTypeId == openLDP || opp.RecordTypeId == openSDP || opp.RecordTypeId == openHR || opp.RecordTypeId == onlineProg)) {
+                Boolean hasInvoiceData = opp.APP_InvoiceCountry__c != null
+                                      || opp.APP_InvoiceState__c   != null
+                                      || opp.APP_InvoiceCity__c    != null;
+                Boolean invoiceChanged = oldMap == null
+                                      || opp.APP_InvoiceCountry__c != oldMap.get(opp.Id).APP_InvoiceCountry__c
+                                      || opp.APP_InvoiceState__c   != oldMap.get(opp.Id).APP_InvoiceState__c
+                                      || opp.APP_InvoiceCity__c    != oldMap.get(opp.Id).APP_InvoiceCity__c;
+                if (hasInvoiceData && invoiceChanged) {
+                    mapContactIdAndOpp.put(opp.APP_Contact__c, opp);
+                }
+            }
+        }
+        if (mapContactIdAndOpp.isEmpty()) return;
+        List<Contact> contactsToUpdate = [SELECT Id, City__c, Country__c, State__c
+                                          FROM Contact
+                                          WHERE Id IN :mapContactIdAndOpp.keyset()];
+        Map<Id, Contact> updatedContacts = new Map<Id, Contact>();
+        for (Contact con : contactsToUpdate) {
+            Opportunity opp = mapContactIdAndOpp.get(con.Id);
+            if (opp.APP_InvoiceCountry__c != null) {
+                con.Country__c = opp.APP_InvoiceCountry__c;
+            }
+            if (opp.APP_InvoiceState__c != null) {
+                con.State__c = opp.APP_InvoiceState__c;
+            }
+            if (opp.APP_InvoiceCity__c != null) {
+                con.City__c = opp.APP_InvoiceCity__c;
+            }
+            updatedContacts.put(con.Id, con);
+        }
+        if (!updatedContacts.isEmpty()) {
+            update updatedContacts.values();
         }
     }
 }
